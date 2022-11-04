@@ -13,25 +13,26 @@ const userSchema = new Schema(
       required: [true, "Email is required"],
       unique: true,
     },
-    subscription: {
+    name: {
       type: String,
-      enum: ["starter", "pro", "business"],
-      default: "starter",
+      // enum: ["starter", "pro", "business"],
+      // unique: true,
+    },
+    city: {
+      type: String,
+    },
+    phone: {
+      type: Number,
+      unique: true,
+    },
+    birthday: {
+      type: Number,
     },
     avatarURL: {
       type: String,
       // required: true,
     },
     token: String,
-    verify: {
-      type: Boolean,
-      default: false,
-    },
-    verificationToken: {
-      type: String,
-      required: [true, "Verify token is required"],
-    },
-    roles: [{ type: String, ref: "Role" }],
   },
   { versionKey: false, timestamps: true }
 );
@@ -48,9 +49,9 @@ const schemas = {
           tlds: { allow: ["com", "net", "ua"] },
         })
         .required(),
-      subscription: Joi.string().alphanum(),
+     
+      birthday: Joi.number(),
       avatarURL: Joi.string(),
-      // token: Joi.string(),
     });
     const validateUser = schema.validate(req.body);
     if (validateUser.error) {
@@ -74,9 +75,11 @@ const schemas = {
     }
     next();
   },
-  subscriptionValidation: (req, res, next) => {
+  addInfoValidation: (req, res, next) => {
     const schema = Joi.object({
-      subscription: Joi.string().valid("starter", "pro", "business").required(),
+      name: Joi.string().alphanum().required(),
+      city: Joi.string().alphanum().required(),
+      phone: Joi.number().required(),
     });
     const validateLogin = schema.validate(req.body);
     if (validateLogin.error) {
@@ -84,16 +87,16 @@ const schemas = {
     }
     next();
   },
-  verifyEmailSchema: (req, res, next) => {
-    const schema = Joi.object({
-      email: Joi.string().required(),
-    });
-    const verifyEmail = schema.validate(req.body);
-    if (verifyEmail.error) {
-      return res.status(400).json({ message: "missing required field email" });
-    }
-    next();
-  },
+  // verifyEmailSchema: (req, res, next) => {
+  //   const schema = Joi.object({
+  //     email: Joi.string().required(),
+  //   });
+  //   const verifyEmail = schema.validate(req.body);
+  //   if (verifyEmail.error) {
+  //     return res.status(400).json({ message: "missing required field email" });
+  //   }
+  //   next();
+  // },
 };
 
 module.exports = { User, schemas };

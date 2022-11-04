@@ -2,7 +2,7 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 
-const contactsRouter = require("./routes/api/contacts");
+const contactsRouter = require("./routes/api/news");
 const authRouter = require("./routes/api/auth");
 const app = express();
 
@@ -22,7 +22,7 @@ app.use((req, res) => {
 app.use((err, req, res, next) => {
   const {
     status = 500,
-    message = err.message,
+    message = "Server error.",
     code = err.status,
     result = err.result,
   } = err;

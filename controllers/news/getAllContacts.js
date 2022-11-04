@@ -1,4 +1,4 @@
-const { Contact } = require("../../service/schemasContacts");
+const { Contact } = require("../../models/schemasNews");
 
 const getAll = async (req, res) => {
   const { _id: owner } = req.user;

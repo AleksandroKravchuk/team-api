@@ -1,4 +1,4 @@
-const { Contact } = require("../../service/schemasContacts");
+const { Contact } = require("../../models/schemasNews");
 
 const addContactById = async (req, res) => {
   const { body } = req;

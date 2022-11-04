@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const { ctrlWrapper } = require("../../helpers");
-const { schemas } = require("../../service/schemasAuth");
+const { schemas } = require("../../models/schemasAuth");
 const { auth: ctrl, files: ctrlFs } = require("../../controllers");
-const { authenticate, upload, getRole } = require("../../middleware");
+const { authenticate, upload } = require("../../middleware");
 
 router.post(
   "/register",
@@ -14,10 +14,9 @@ router.post("/login", schemas.loginValidation, ctrlWrapper(ctrl.loginUser));
 router.get("/logout", authenticate, ctrlWrapper(ctrl.logoutUser));
 router.get("/current", authenticate, ctrlWrapper(ctrl.getCurrentUser));
 router.patch(
-  "/",
-  authenticate,
-  schemas.subscriptionValidation,
-  ctrlWrapper(ctrl.updateSubscription)
+  "/register/:id",
+  schemas.addInfoValidation,
+  ctrlWrapper(ctrl.addRegisterInformation)
 );
 router.patch(
   "/avatars",
@@ -25,16 +24,5 @@ router.patch(
   upload.single("avatar"),
   ctrlWrapper(ctrlFs.updateAvatar)
 );
-router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verify));
-router.post(
-  "/verify",
-  schemas.verifyEmailSchema,
-  ctrlWrapper(ctrl.resendVerify)
-);
-router.get(
-  "/",
-  getRole(["ADMIN"]),
-  // schemas.userValidation,
-  ctrlWrapper(ctrl.getAllUsers)
-);
+
 module.exports = router;

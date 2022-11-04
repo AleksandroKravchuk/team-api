@@ -1,4 +1,4 @@
-const { Contact } = require("../../service/schemasContacts");
+const { Contact } = require("../../models/schemasNews");
 
 const deleteContact = async (req, res) => {
   const { contactId } = req.params;
@@ -6,7 +6,7 @@ const deleteContact = async (req, res) => {
 
   const result = await Contact.findByIdAndRemove({ _id: contactId });
   if (!result) {
-     throw RequestError(404, `Not found contact id: ${contactId}`);
+    throw RequestError(404, `Not found contact id: ${contactId}`);
   }
   res.json({
     status: "success",

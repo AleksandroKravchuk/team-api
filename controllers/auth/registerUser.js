@@ -1,42 +1,38 @@
-const { nanoid } = require("nanoid");
+// const { nanoid } = require("nanoid");
+require("dotenv").config();
 const bcrypt = require("bcrypt");
-const gravatar = require("gravatar");
-const { User, Role } = require("../../service");
-const { RequestError, sendEmail, createVerifyEmail } = require("../../helpers");
+const { User } = require("../../models");
+const { RequestError } = require("../../helpers");
 
 const registerUser = async (req, res) => {
-  const { email, password, subscription } = req.body;
+  const { email, password } = req.body;
   const hashPassword = await bcrypt.hash(password, 10);
-  const userRole = await Role.findOne({ value: "ADMIN" });
   const user = await User.findOne({ email });
   if (user) {
     throw RequestError(409, "Email in use");
   } else {
-    const secureUrl = gravatar.url(
-      email,
-      { s: "100", r: "x", d: "retro" },
-      true
-    );
-    const verificationToken = nanoid();
-    const newUser = await User.create({
-      email,
-      password: hashPassword,
-      subscription,
-      avatarURL: secureUrl,
-      verificationToken,
-      roles: userRole,
-    });
-    const mail = createVerifyEmail(email, verificationToken);
-    await sendEmail(mail);
-    res.status(201).json({
-      code: 201,
-      status: "success",
-      user: {
-        email: newUser.email,
-        subscription: newUser.subscription,
-        avatarURL: newUser.avatarURL,
-      },
-    });
+    try {
+      // const payload = {
+      //   email,
+      // };
+      // const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "10h" });
+      const newUser = await User.create({
+        email,
+        password: hashPassword,
+      });
+
+      res.status(201).json({
+        code: 201,
+        status: "success",
+        message: "User created.",
+        user: {
+          email: newUser.email,
+          id: newUser._id,
+        },
+      });
+    } catch (error) {
+      throw RequestError(400, "User creation error.");
+    }
   }
 };
 module.exports = registerUser;
