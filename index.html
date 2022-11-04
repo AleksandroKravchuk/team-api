@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form id="form-add-book" enctype="application/x-www-form-urlencoded">
+        <input type="text" name="email" placeholder="email" />
+        <input type="text" name="password" placeholder="password" />
+        <button>Add user</button>
+    </form>
+    <form  id="form-add-avatar" enctype="multipart/form-data">
+    <input name="avatar" type="file" multiple />
+    <button>Add avatar</button>
+</form>
+<h3>AVATAR</h3>
+<div id="books">
+   
+</div>
+ <div id="avatar"></div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.22.0/axios.js'></script>
+    <script>
+    const userContainer = document.getElementById("books");
+       const avatarContainer = document.getElementById("avatar");
+        const formAddBook = document.getElementById("form-add-book");
+        const formAddAvatar = document.getElementById("form-add-avatar");
+        
+        const baseURL = "http://localhost:3001";
+        formAddBook.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const { email,  password } = this.elements;
+            const data = new FormData();
+            data.append("email", email.value);
+            data.append("password", password.value);
+         
+      const body={
+                email: email.value,
+                password: password.value,
+            }
+            axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+            axios.post(`${baseURL}/users/register`, body, 
+             )
+                .then( ({data})=>{
+               userContainer.innerHTML=''
+               avatarContainer.innerHTML = ''
+                const   userEmail =      `
+                    <h4>${data.user.email}</h4>`
+                     const userAvatar = `
+                     <img src="${data.user.avatarURL}" />`
+                        userContainer.insertAdjacentHTML("beforeend", userEmail)
+                    avatarContainer.insertAdjacentHTML("beforeend", userAvatar)
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            formAddBook.reset()
+        })
+        
+           
+            window.addEventListener('beforeunload', (event) => {
+                event.preventDefault();
+                event.returnValue = '';
+            });
+         formAddAvatar.addEventListener("submit",async function (event) {
+            event.preventDefault();
+          
+                 
+                const { avatar } = this.elements;
+                const data = new FormData();
+                data.append("avatar", avatar.files[0]);
+                try {
+                    
+                     const result=await   axios.patch(`${baseURL}/users/avatars`, data,
+                    {
+                        headers: {
+                           'Content-Type': 'multipart/form-data',
+                            'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJyb0BtYWlsaW5hdG9yLmNvbSIsImlhdCI6MTY2NjA5NzA5OSwiZXhwIjoxNjY2MTMzMDk5fQ.v0ZPRweVGqV_reGHVJVaveSfYkKj3aAcPwU3sx4gu8Y",
+                        }},
+                )
+              
+                 avatarContainer.innerHTML = ''
+                
+                     const userAvatar = `
+                        <img src="${ baseURL }/${result.data.avatarURL}" />`
+                       
+                      avatarContainer.insertAdjacentHTML("beforeend", userAvatar) 
+                      
+                } catch (error) {
+                    console.log(error)
+                }
+             
+                formAddAvatar.reset()
+            })
+            
+    </script>
+</body>
+
+</html>
