@@ -23,7 +23,7 @@ const userSchema = new Schema(
     },
     phone: {
       type: Number,
-      unique: true,
+      // unique: true,
     },
     birthday: {
       type: Number,
@@ -39,26 +39,26 @@ const userSchema = new Schema(
 userSchema.post("save", handleSaveErrors);
 const User = model("users", userSchema);
 
-const schemas = {
-  userValidation: (req, res, next) => {
-    const schema = Joi.object({
-      password: Joi.string().alphanum().min(2).max(30).required(),
-      email: Joi.string()
-        .email({
-          minDomainSegments: 2,
-          tlds: { allow: ["com", "net", "ua"] },
-        })
-        .required(),
-     
-      birthday: Joi.number(),
-      avatarURL: Joi.string(),
-    });
-    const validateUser = schema.validate(req.body);
-    if (validateUser.error) {
-      return res.status(400).json({ message: `${validateUser.error}` });
-    }
-    next();
-  },
+const schemasAuth = {
+  // userValidation: (req, res, next) => {
+  //   const schema = Joi.object({
+  //     password: Joi.string().alphanum().min(2).max(30).required(),
+  //     email: Joi.string()
+  //       .email({
+  //         minDomainSegments: 2,
+  //         tlds: { allow: ["com", "net", "ua"] },
+  //       })
+  //       .required(),
+
+  //     birthday: Joi.number(),
+  //     avatarURL: Joi.string(),
+  //   });
+  //   const validateUser = schema.validate(req.body);
+  //   if (validateUser.error) {
+  //     return res.status(400).json({ message: `${validateUser.error}` });
+  //   }
+  //   next();
+  // },
   loginValidation: (req, res, next) => {
     const schema = Joi.object({
       password: Joi.string().alphanum().min(2).max(30).required(),
@@ -99,4 +99,4 @@ const schemas = {
   // },
 };
 
-module.exports = { User, schemas };
+module.exports = { User, schemasAuth };

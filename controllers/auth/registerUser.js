@@ -12,10 +12,6 @@ const registerUser = async (req, res) => {
     throw RequestError(409, "Email in use");
   } else {
     try {
-      // const payload = {
-      //   email,
-      // };
-      // const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "10h" });
       const newUser = await User.create({
         email,
         password: hashPassword,
@@ -31,7 +27,8 @@ const registerUser = async (req, res) => {
         },
       });
     } catch (error) {
-      throw RequestError(400, "User creation error.");
+      console.log(error);
+      // throw RequestError(400, "User creation error.");
     }
   }
 };

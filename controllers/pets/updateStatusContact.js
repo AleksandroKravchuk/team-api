@@ -1,4 +1,4 @@
-const { Contact } = require("../../models/schemasNews");
+const { Contact } = require("../../models/schemasPets");
 const { RequestError } = require("../../helpers");
 
 const updateStatusContact = async (req, res) => {
