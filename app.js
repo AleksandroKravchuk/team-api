@@ -5,6 +5,7 @@ const cors = require("cors");
 const petsRouter = require("./routes/api/pets");
 const authRouter = require("./routes/api/auth");
 const newsRouter = require("./routes/api/news");
+const friendsRouter = require("./routes/api/friends");
 const app = express();
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
@@ -14,9 +15,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/avatars", express.static("public/avatars"));
+// app.use("/friends", express.static("public/IMG/"));
 app.use("/api/pets", petsRouter);
 app.use("/users", authRouter);
 app.use("/news", newsRouter);
+app.use("/friends", friendsRouter);
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
 });
