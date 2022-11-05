@@ -6,28 +6,28 @@ const news = new Schema(
   {
     title: {
       type: String,
-      minlength: 2,
-      maxlength: 20,
+      // minlength: 2,
+      // maxlength: 20,
       required: [true, "Title is required"],
     },
     text: {
       type: String,
-      minlength: 2,
-      maxlength: 20,
+      // minlength: 2,
+      // maxlength: 20,
       required: [true, "Text is required"],
       unique: true,
     },
     date: {
-      type: Date,
-      minlength: 2,
-      maxlength: 200,
+      type: String,
+      // minlength: 2,
+      // maxlength: 200,
       required: [true, "Comments required"],
     },
-    owner: {
-      type: Schema.Types.ObjectId,
-      ref: "users",
-      required: true,
-    },
+    // owner: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "users",
+    //   required: true,
+    // },
   },
 
   { versionKey: false, timestamps: true }

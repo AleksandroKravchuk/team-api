@@ -2,11 +2,13 @@ const express = require("express");
 // const { schemas } = require("../../models/schemasNews");
 const { ctrlWrapper } = require("../../helpers");
 const router = express.Router();
-const { getAllNews } = require("../../controllers");
+const { news: ctrl } = require("../../controllers");
 // const { authenticate } = require("../../middleware");
-
-router.get("/",  ctrlWrapper(getAllNews));
-
+const { isValidId } = require("../../middleware");
+router.get("/", ctrlWrapper(ctrl.getAll));
+router.get("/:id", isValidId, ctrlWrapper(ctrl.getNewsById));
+router.get("/search/:value", ctrlWrapper(ctrl.getNewsBySearch));
+router.post("/addNews", ctrlWrapper(ctrl.addNews));
 // router.get("/:contactId", authenticate, ctrlWrapper(ctrl.getById));
 
 // router.post(

@@ -27,8 +27,7 @@ const registerUser = async (req, res) => {
         },
       });
     } catch (error) {
-      console.log(error);
-      // throw RequestError(400, "User creation error.");
+      throw RequestError(400, "User creation error.");
     }
   }
 };

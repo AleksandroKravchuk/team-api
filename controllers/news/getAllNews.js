@@ -1,4 +1,4 @@
-const { News } = require("../../models/schemasPets");
+const { News } = require("../../models/schemasNews");
 
 const getAllNews = async (req, res) => {
   const { page = 1, limit = 6 } = req.query;
@@ -7,13 +7,11 @@ const getAllNews = async (req, res) => {
   const results = await News.find({
     skip,
     limit,
-  }).populate("owner", "email");
+  });
   res.json({
     status: "success",
     code: 200,
-    data: {
-      news: results,
-    },
+    news: results,
   });
 };
 module.exports = getAllNews;
