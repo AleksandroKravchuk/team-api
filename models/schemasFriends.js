@@ -6,46 +6,22 @@ const friends = new Schema(
   {
     name: {
       type: String,
-      // minlength: 2,
-      // maxlength: 20,
-      //   required: [true, "Title is required"],
     },
     logo: {
       type: String,
-      // minlength: 2,
-      // maxlength: 20,
-      //   required: [true, "Title is required"],
     },
     time: {
       type: Array,
-      // minlength: 2,
-      // maxlength: 20,
-      //   required: [true, "Text is required"],
-      //   unique: true,
     },
     address: {
       type: String,
-      // minlength: 2,
-      // maxlength: 200,
-      //   required: [true, "Comments required"],
     },
     email: {
       type: String,
-      // minlength: 2,
-      // maxlength: 200,
-      //   required: [true, "Comments required"],
     },
     phone: {
       type: String,
-      // minlength: 2,
-      // maxlength: 200,
-      //   required: [true, "Comments required"],
     },
-    // owner: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "users",
-    //   required: true,
-    // },
   },
 
   { versionKey: false, timestamps: true }
@@ -53,4 +29,27 @@ const friends = new Schema(
 friends.post("save", handleSaveErrors);
 const Friends = model("friends", friends);
 
-module.exports = { Friends };
+const workTimes = new Schema(
+  {
+    workDays: {
+      type: String,
+    },
+    dayOffTimes: {
+      type: String,
+    },
+    dayOff: {
+      type: String,
+    },
+    owner: {
+      type: String,
+      ref: "friends",
+      required: true,
+    },
+  },
+
+  { versionKey: false, timestamps: true }
+);
+workTimes.post("save", handleSaveErrors);
+const WorkTimes = model("workTimes", workTimes);
+
+module.exports = { Friends, WorkTimes };

@@ -1,42 +1,38 @@
 const express = require("express");
-// const { schemas } = require("../../models/schemasNews");
+const { schemas } = require("../../models/schemasPets");
 const { ctrlWrapper } = require("../../helpers");
 const router = express.Router();
-const { contacts: ctrl } = require("../../controllers");
-const { authenticate, isValidId } = require("../../middleware");
+const { pets: ctrl } = require("../../controllers");
+const { authenticate, isValidId, upload } = require("../../middleware");
 
-router.get("/", authenticate, ctrlWrapper(ctrl.getAll));
+router.get("/", authenticate, ctrlWrapper(ctrl.getAllPets));
 
-router.get("/:contactId", authenticate, ctrlWrapper(ctrl.getById));
+// router.get("/:contactId", authenticate, ctrlWrapper(ctrl.getById));
 
 router.post(
   "/",
   authenticate,
-  // schemas.bodyValidation,
-  ctrlWrapper(ctrl.addContact)
+  schemas.petsValidation,
+  ctrlWrapper(ctrl.addPet)
 );
 
-router.delete(
-  "/:contactId",
-  authenticate,
-  isValidId,
-  ctrlWrapper(ctrl.deleteContact)
-);
+router.delete("/:id", authenticate, isValidId, ctrlWrapper(ctrl.deletePet));
 
-router.put(
-  "/:contactId",
-  authenticate,
-  isValidId,
-  // schemas.bodyValidation,
-  ctrlWrapper(ctrl.updateContact)
-);
+// router.put(
+//   "/:contactId",
+//   authenticate,
+//   isValidId,
+//   // schemas.bodyValidation,
+//   ctrlWrapper(ctrl.updateContact)
+// );
 
 router.patch(
-  "/:contactId/favorite",
+  "/:id",
   authenticate,
   isValidId,
-  // schemas.favoriteValidation,
-  ctrlWrapper(ctrl.updateStatusContact)
+  schemas.addPetsValidation,
+  upload.single("photoPet"),
+  ctrlWrapper(ctrl.addPetInfo)
 );
 
 module.exports = router;

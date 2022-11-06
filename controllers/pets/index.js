@@ -1,14 +1,14 @@
-const getAll = require("./getAllContacts");
+const getAllPets = require("./getAllPets");
 const getById = require("./getContactById");
-const addContact = require("./addContact");
-const deleteContact = require("./deleteContact");
+const addPet = require("./addPet");
+const deletePet = require("./deletePet");
 const updateContact = require("./updateContact");
-const updateStatusContact = require("./updateStatusContact");
+const addPetInfo = require("./addPetInfo");
 module.exports = {
-  getAll,
+  getAllPets,
   getById,
-  addContact,
-  deleteContact,
+  addPet,
+  deletePet,
   updateContact,
-  updateStatusContact,
+  addPetInfo,
 };

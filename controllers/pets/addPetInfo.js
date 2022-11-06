@@ -1,19 +1,19 @@
 const fs = require("fs/promises");
 const path = require("path");
-const { User } = require("../../models");
+const { Pets } = require("../../models");
 const { configImg, RequestError } = require("../../helpers");
+const avatarsDir = path.join("public", "pets");
 
-const avatarsDir = path.join("public", "avatars");
-
-const updateAvatar = async (req, res) => {
+const addPetInfo = async (req, res) => {
   if (!req.file) {
     throw RequestError(400, "no file");
   }
   try {
-    const { _id } = req.user;
+    const { id } = req.params;
+    const { comments } = req.body;
     const { path: tempUpload, originalname } = req.file;
     const extension = originalname.split(".").pop();
-    const filename = `${_id}.${extension}`;
+    const filename = `${id}.${extension}`;
     if (
       extension === "jpeg" ||
       extension === "png" ||
@@ -28,18 +28,25 @@ const updateAvatar = async (req, res) => {
         filename,
         avatarsDir,
         quality: 60,
-        width: 233,
-        height: 233,
+        width: 288,
+        height: 328,
       };
       configImg(parameterAvatar);
       await fs.unlink(tempUpload);
-      const avatarURL = path.join("avatars", filename);
-
-      await User.findByIdAndUpdate(_id, { avatarURL }, { new: true });
-      res.status(200).json({
-        code: 200,
+      const photoPet = path.join("pets", filename);
+      const result = await Pets.findByIdAndUpdate(
+        id,
+        { comments, photoPet },
+        { new: true }
+      );
+      if (!result) {
+        throw RequestError(404, `Not found contact id: ${id}`);
+      }
+      res.json({
         status: "success",
-        avatarURL,
+        message: "Pet success added",
+        code: 200,
+        data: { pet: result },
       });
     } else {
       throw RequestError(400, "Error format file");
@@ -49,4 +56,5 @@ const updateAvatar = async (req, res) => {
     throw error;
   }
 };
-module.exports = updateAvatar;
+
+module.exports = addPetInfo;

@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/avatars", express.static("public/avatars"));
 // app.use("/friends", express.static("public/IMG/"));
-app.use("/api/pets", petsRouter);
+app.use("/pets", petsRouter);
 app.use("/users", authRouter);
 app.use("/news", newsRouter);
 app.use("/friends", friendsRouter);

@@ -1,50 +1,48 @@
-const { date } = require("joi");
 const { Schema, model } = require("mongoose");
-// const Joi = require("joi");
+const Joi = require("joi");
 const { handleSaveErrors } = require("../helpers");
 
 const pets = new Schema(
   {
+    photoPet: { type: String },
     name: {
       type: String,
       minlength: 2,
       maxlength: 20,
-      required: [true, "Name is required"],
+      // required: [true, "Name is required"],
     },
     birth: {
-      type: Date,
+      type: String,
       minlength: 2,
-      maxlength: 30,
-      unique: true,
-      require: [true, "birth is required"],
+      maxlength: 10,
+      // require: [true, "birth is required"],
     },
     breed: {
       type: String,
       minlength: 2,
       maxlength: 20,
-      required: [true, "Breed is required"],
-      unique: true,
+      // required: [true, "Breed is required"],
     },
     comments: {
       type: String,
       minlength: 2,
       maxlength: 200,
-      required: [true, "Comments required"],
+      // required: [true, "Comments required"],
     },
     lovation: {
       type: String,
       minlength: 2,
       maxlength: 20,
-      required: [true, "Lovation required"],
+      // required: [true, "Lovation required"],
     },
     sex: {
       type: String,
-      // enum: [],
-      required: [true, "Sex required"],
+      enum: ["male", "female"],
+      // required: [true, "Sex required"],
     },
     price: {
       type: Number,
-      required: [true, "Price required"],
+      // required: [true, "Price required"],
     },
     owner: {
       type: Schema.Types.ObjectId,
@@ -58,35 +56,33 @@ const pets = new Schema(
 pets.post("save", handleSaveErrors);
 const Pets = model("pets", pets);
 
-// const schemas = {
-//   bodyValidation: (req, res, next) => {
-//     const schema = Joi.object({
-//       name: Joi.string().alphanum().min(2).max(30).required(),
-//       email: Joi.string()
-//         .email({
-//           minDomainSegments: 2,
-//           tlds: { allow: ["com", "net", "ua"] },
-//         })
-//         .required(),
-//       phone: Joi.string().alphanum().min(5).max(20).required(),
-//       favorite: Joi.boolean(),
-//     });
-//     const validateBody = schema.validate(req.body);
-//     if (validateBody.error) {
-//       return res.status(400).json({ message: "missing required name field" });
-//     }
-//     next();
-//   },
-//   favoriteValidation: (req, res, next) => {
-//     const schema = Joi.object({
-//       favorite: Joi.boolean().required(),
-//     });
-//     const validatePutBody = schema.validate(req.body);
-//     if (validatePutBody.error) {
-//       return res.status(400).json({ message: "missing field favorite" });
-//     }
-//     next();
-//   },
-// };
+const schemas = {
+  petsValidation: (req, res, next) => {
+    const schema = Joi.object({
+      name: Joi.string().alphanum().min(2).max(30).required(),
+      birth: Joi.string().required(),
+      breed: Joi.string().required(),
+    });
+    const validateBody = schema.validate(req.body);
+    if (validateBody.error) {
+      return res.status(400).json({ message: "missing required name field" });
+    }
+    next();
+  },
+  addPetsValidation: (req, res, next) => {
+    const schema = Joi.object({
+      // photoPet: Joi.string().required(),
+      // comments: Joi.string().alphanum().min(5).max(300).required(),
+      // lovation: Joi.string(),
+      // sex: Joi.string(),
+      // price: Joi.number(),
+    });
+    const validateBody = schema.validate(req.body);
+    if (validateBody.error) {
+      return res.status(400).json({ message: "missing required name field" });
+    }
+    next();
+  },
+};
 
-module.exports = { Pets };
+module.exports = { Pets, schemas };
