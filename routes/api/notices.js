@@ -3,9 +3,9 @@ const express = require("express");
 const { ctrlWrapper } = require("../../helpers");
 const router = express.Router();
 const { notices: ctrl } = require("../../controllers");
-const { authenticate, isValidId, upload } = require("../../middleware");
+const { authenticate, isValidId } = require("../../middleware");
 
-router.get("/", ctrlWrapper(ctrl.getNotices));
+router.get("/", ctrlWrapper(ctrl.getAllNotices));
 
 // router.get("/:contactId", authenticate, ctrlWrapper(ctrl.getById));
 
@@ -26,13 +26,13 @@ router.post(
 //   ctrlWrapper(ctrl.updateContact)
 // );
 
-// router.patch(
-//   "/:id",
-//   authenticate,
-//   isValidId,
-//   // schemas.addPetsValidation,
-//   upload.single("photoPet"),
-//   ctrlWrapper(ctrl.addPetInfo)
-// );
+router.patch(
+  "/:id",
+  //   authenticate,
+  isValidId,
+  // schemas.addPetsValidation,
+  //   upload.single("photoPet"),
+  ctrlWrapper(ctrl.changeFavorite)
+);
 
 module.exports = router;
