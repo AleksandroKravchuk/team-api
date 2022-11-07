@@ -21,9 +21,11 @@ const registerUser = async (req, res) => {
         code: 201,
         status: "success",
         message: "User created.",
-        user: {
-          email: newUser.email,
-          id: newUser._id,
+        data: {
+          user: {
+            email: newUser.email,
+            id: newUser._id,
+          },
         },
       });
     } catch (error) {

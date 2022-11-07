@@ -13,7 +13,10 @@ const addFriend = async (req, res) => {
   res.json({
     status: "success",
     code: 200,
-    friends: results,
+    message: "News added",
+    data: {
+      friends: results,
+    },
   });
 };
 module.exports = addFriend;

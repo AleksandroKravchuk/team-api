@@ -11,7 +11,9 @@ const getAllFriends = async (req, res) => {
   res.json({
     status: "success",
     code: 200,
-    news: results,
+    data: {
+      friends: results,
+    },
   });
 };
 module.exports = getAllFriends;

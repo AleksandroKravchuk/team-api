@@ -5,8 +5,13 @@ const { configImg, RequestError } = require("../../helpers");
 const avatarsDir = path.join("public", "pets");
 
 const addPetInfo = async (req, res) => {
+  const { comments } = req.body;
+  // console.log(comments);
   if (!req.file) {
-    throw RequestError(400, "no file");
+    throw RequestError(400, "file required");
+  }
+  if (!comments) {
+    throw RequestError(400, "comments required");
   }
   try {
     const { id } = req.params;

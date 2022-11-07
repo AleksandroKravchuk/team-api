@@ -10,12 +10,15 @@ const getUserInformation = async (req, res) => {
     res.json({
       status: "success",
       code: 200,
-      user: {
-        name: result.name,
-        email: result.email,
-        birthday: result.birthday,
-        phone: result.phone,
-        city: result.city,
+      data: {
+        user: {
+          name: result.name,
+          email: result.email,
+          birthday: result.birthday,
+          phone: result.phone,
+          city: result.city,
+          logo: result.avatarURL,
+        },
       },
     });
   }

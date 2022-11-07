@@ -4,7 +4,7 @@ const getCurrentUser = async (req, res) => {
     code: 200,
     status: "success",
     message: "	Information found.",
-    email,
+    data: { email },
   });
 };
 module.exports = getCurrentUser;

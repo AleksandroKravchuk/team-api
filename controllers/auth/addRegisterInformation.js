@@ -22,13 +22,15 @@ const addRegisterInformation = async (req, res) => {
     res.status(201).json({
       code: 200,
       status: "The user was successfully registered.",
-      user: {
-        name: addInfoRegister.name,
-        email: addInfoRegister.email,
-        phone: addInfoRegister.phone,
-        city: addInfoRegister.city,
-        avatarURL: secureUrl,
-        token: addInfoRegister.token,
+      data: {
+        user: {
+          name: addInfoRegister.name,
+          email: addInfoRegister.email,
+          phone: addInfoRegister.phone,
+          city: addInfoRegister.city,
+          avatarURL: secureUrl,
+          token: addInfoRegister.token,
+        },
       },
     });
   } catch (error) {

@@ -1,5 +1,5 @@
 const getAllPets = require("./getAllPets");
-const getById = require("./getContactById");
+const getById = require("./getPetById");
 const addPet = require("./addPet");
 const deletePet = require("./deletePet");
 const updateContact = require("./updateContact");

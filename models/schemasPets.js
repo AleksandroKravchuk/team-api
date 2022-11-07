@@ -69,20 +69,18 @@ const schemas = {
     }
     next();
   },
-  addPetsValidation: (req, res, next) => {
-    const schema = Joi.object({
-      // photoPet: Joi.string().required(),
-      // comments: Joi.string().alphanum().min(5).max(300).required(),
-      // lovation: Joi.string(),
-      // sex: Joi.string(),
-      // price: Joi.number(),
-    });
-    const validateBody = schema.validate(req.body);
-    if (validateBody.error) {
-      return res.status(400).json({ message: "missing required name field" });
-    }
-    next();
-  },
+  // addPetsValidation: (req, res, next) => {
+  //   const schema = Joi.object({
+  //     // comments: Joi.string().required(),
+  //     // photoPet: Joi.string().required(),
+  //     // comments: Joi.string().alphanum().min(5).max(300).required(),
+  //   });
+  //   const validateBody = schema.validate(req.body);
+  //   if (validateBody.error) {
+  //     return res.status(400).json({ message: validateBody.error });
+  //   }
+  //   next();
+  // },
 };
 
 module.exports = { Pets, schemas };

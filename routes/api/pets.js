@@ -30,7 +30,7 @@ router.patch(
   "/:id",
   authenticate,
   isValidId,
-  schemas.addPetsValidation,
+  // schemas.addPetsValidation,
   upload.single("photoPet"),
   ctrlWrapper(ctrl.addPetInfo)
 );

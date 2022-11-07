@@ -13,13 +13,7 @@ router.post(
 router.post("/login", schemasAuth.loginValidation, ctrlWrapper(ctrl.loginUser));
 router.get("/logout", authenticate, ctrlWrapper(ctrl.logoutUser));
 router.get("/current", authenticate, ctrlWrapper(ctrl.getCurrentUser));
-router.get("/", authenticate, ctrlWrapper(ctrl.getUserInformation));
-router.patch(
-  "/",
-  authenticate,
-  schemasAuth.userValidation,
-  ctrlWrapper(ctrl.updateUserInformation)
-);
+
 router.patch(
   "/register/:id",
   schemasAuth.addInfoValidation,

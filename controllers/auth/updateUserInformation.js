@@ -16,12 +16,14 @@ const updateUserInformation = async (req, res) => {
     res.status(201).json({
       code: 200,
       status: "The user information updated",
-      user: {
-        name: updateUserInfo.name,
-        email: updateUserInfo.email,
-        birthday: updateUserInfo.birthday,
-        phone: updateUserInfo.phone,
-        city: updateUserInfo.city,
+      data: {
+        user: {
+          name: updateUserInfo.name,
+          email: updateUserInfo.email,
+          birthday: updateUserInfo.birthday,
+          phone: updateUserInfo.phone,
+          city: updateUserInfo.city,
+        },
       },
     });
   } catch (error) {

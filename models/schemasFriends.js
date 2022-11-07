@@ -11,7 +11,7 @@ const friends = new Schema(
       type: String,
     },
     time: {
-      type: Array,
+      type: String,
     },
     address: {
       type: String,
