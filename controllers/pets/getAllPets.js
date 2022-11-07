@@ -15,13 +15,7 @@ const getAllPets = async (req, res) => {
     status: "success",
     code: 200,
     data: {
-      pets: {
-        photoPet: results.photoPet,
-        name: results.name,
-        birth: results.birth,
-        breed: results.breed,
-        comments: results.comments,
-      },
+      pets: results,
     },
   });
   // } else {
