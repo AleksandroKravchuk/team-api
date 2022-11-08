@@ -5,7 +5,7 @@ const router = express.Router();
 const { notices: ctrl } = require("../../controllers");
 const { authenticate, isValidId } = require("../../middleware");
 
-router.get("/", ctrlWrapper(ctrl.getAllNotices));
+router.get("/:value", ctrlWrapper(ctrl.getAllNotices));
 
 // router.get("/:contactId", authenticate, ctrlWrapper(ctrl.getById));
 
@@ -28,7 +28,7 @@ router.post(
 
 router.patch(
   "/:id",
-  //   authenticate,
+  // authenticate,
   isValidId,
   // schemas.addPetsValidation,
   //   upload.single("photoPet"),

@@ -5,7 +5,11 @@ const { handleSaveErrors } = require("../helpers");
 const notices = new Schema(
   {
     photo: { type: String },
-    category: { type: String },
+    category: {
+      type: [String],
+      unique: true,
+      enum: ["sell", "lost-found", "in good hands"],
+    },
     title: {
       type: String,
       minlength: 2,
