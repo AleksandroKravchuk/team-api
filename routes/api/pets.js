@@ -7,8 +7,6 @@ const { authenticate, isValidId, upload } = require("../../middleware");
 
 router.get("/", authenticate, ctrlWrapper(ctrl.getAllPets));
 
-// router.get("/:contactId", authenticate, ctrlWrapper(ctrl.getById));
-
 router.post(
   "/",
   authenticate,
