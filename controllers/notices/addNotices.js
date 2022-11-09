@@ -2,33 +2,11 @@ const { Notices } = require("../../models/schemasNotices");
 // const { RequestError } = require("../../helpers");
 
 const addNotices = async (req, res) => {
-  const {
-    photo,
-    category,
-    title,
-    name,
-    birth,
-    breed,
-    price,
-    sex,
-    place,
-    age,
-    comments,
-  } = req.body;
-  // const { _id: owner } = req.user;
+  const { body } = req;
+  const { _id: owner } = req.user;
   const results = await Notices.create({
-    photo,
-    category,
-    title,
-    name,
-    birth,
-    breed,
-    price,
-    sex,
-    place,
-    age,
-    comments,
-    // owner,
+    ...body,
+    owner,
   });
   res.json({
     status: "success",

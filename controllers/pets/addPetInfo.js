@@ -1,6 +1,6 @@
 const fs = require("fs/promises");
 const path = require("path");
-const { Pets } = require("../../models");
+const { Pets } = require("../../models/schemasPets");
 const { configImg, RequestError } = require("../../helpers");
 const avatarsDir = path.join("public", "pets");
 
