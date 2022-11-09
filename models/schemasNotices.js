@@ -7,7 +7,6 @@ const notices = new Schema(
     photo: { type: String },
     category: {
       type: String,
-      unique: true,
       enum: ["sell", "lost-found", "in good hands"],
     },
     title: {
@@ -68,10 +67,11 @@ const notices = new Schema(
       type: String,
       // required: [true, "Price required"],
     },
+    comments: { type: String },
     owner: {
       type: Schema.Types.ObjectId,
       ref: "users",
-      required: true,
+      // required: true,
     },
   },
 

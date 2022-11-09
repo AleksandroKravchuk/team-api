@@ -3,17 +3,17 @@ const express = require("express");
 const { ctrlWrapper } = require("../../helpers");
 const router = express.Router();
 const { notices: ctrl } = require("../../controllers");
-const { authenticate, isValidId } = require("../../middleware");
+const { authenticate, isValidId, upload } = require("../../middleware");
 
 router.get("/:value", ctrlWrapper(ctrl.getAllNotices));
 router.get("/one/:id", ctrlWrapper(ctrl.getNoticeById));
-router.get("/owner", ctrlWrapper(ctrl.getNoticeOwner));
-router.get("/favorite", ctrlWrapper(ctrl.getNoticeFavorite));
+
+router.get("/owner/own", authenticate, ctrlWrapper(ctrl.getNoticesOwn));
 // router.get("/:contactId", authenticate, ctrlWrapper(ctrl.getById));
 
 router.post(
   "/",
-  authenticate,
+  // authenticate,
   //   schemas.petsValidation,
   ctrlWrapper(ctrl.addNotices)
 );
@@ -33,8 +33,8 @@ router.patch(
   // authenticate,
   isValidId,
   // schemas.addPetsValidation,
-  //   upload.single("photoPet"),
-  ctrlWrapper(ctrl.changeFavorite)
+  upload.single("photoNotices"),
+  ctrlWrapper(ctrl.createNotice)
 );
 
 module.exports = router;
