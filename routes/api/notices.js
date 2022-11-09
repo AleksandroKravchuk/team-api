@@ -13,7 +13,7 @@ router.get("/owner/own", authenticate, ctrlWrapper(ctrl.getNoticesOwn));
 
 router.post(
   "/",
-  // authenticate,
+  authenticate,
   //   schemas.petsValidation,
   ctrlWrapper(ctrl.addNotices)
 );
