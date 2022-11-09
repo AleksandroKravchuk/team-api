@@ -6,12 +6,14 @@ const { notices: ctrl } = require("../../controllers");
 const { authenticate, isValidId } = require("../../middleware");
 
 router.get("/:value", ctrlWrapper(ctrl.getAllNotices));
-
+router.get("/one/:id", ctrlWrapper(ctrl.getNoticeById));
+router.get("/owner", ctrlWrapper(ctrl.getNoticeOwner));
+router.get("/favorite", ctrlWrapper(ctrl.getNoticeFavorite));
 // router.get("/:contactId", authenticate, ctrlWrapper(ctrl.getById));
 
 router.post(
   "/",
-  //   authenticate,
+  authenticate,
   //   schemas.petsValidation,
   ctrlWrapper(ctrl.addNotices)
 );

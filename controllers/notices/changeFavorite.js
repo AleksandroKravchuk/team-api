@@ -3,9 +3,9 @@ const { RequestError } = require("../../helpers");
 
 const changeFavorite = async (req, res) => {
   const { id } = req.params;
-  const { favorite, category } = req.body;
-  console.log(Notices);
-  const update = { $push: { category: [category] }, favorite };
+  // const { favorite, category } = req.body;
+
+  const update = { $push: { favorite: [id] } };
   const result = await Notices.findByIdAndUpdate(id, update, {
     new: true,
   });

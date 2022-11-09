@@ -9,7 +9,8 @@ const getAllNotices = async (req, res) => {
   if (value === "for-free") {
     value = "in good hands";
   }
-  const results = await Notices.find({ category: { $in: [value] } }, "", {
+  // { category: { $in: [value] }
+  const results = await Notices.find({ category: value }, "", {
     skip,
     limit,
   });

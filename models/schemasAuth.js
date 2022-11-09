@@ -34,7 +34,9 @@ const userSchema = new Schema(
       // required: true,
     },
     token: String,
+    notices: [{ type: Schema.Types.ObjectId, ref: "Notices" }],
   },
+
   { versionKey: false, timestamps: true }
 );
 userSchema.post("save", handleSaveErrors);

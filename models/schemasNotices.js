@@ -6,15 +6,21 @@ const notices = new Schema(
   {
     photo: { type: String },
     category: {
-      type: [String],
+      type: String,
       unique: true,
       enum: ["sell", "lost-found", "in good hands"],
     },
     title: {
       type: String,
       minlength: 2,
-      maxlength: 30,
+      maxlength: 100,
       required: [true, "Title is required"],
+    },
+    name: {
+      type: String,
+      minlength: 2,
+      maxlength: 30,
+      required: [true, "Name is required"],
     },
     breed: {
       type: String,
@@ -22,24 +28,30 @@ const notices = new Schema(
       maxlength: 20,
       required: [true, "Breed is required"],
     },
+    birth: {
+      type: String,
+      minlength: 2,
+      maxlength: 20,
+      required: [true, "Birth is required"],
+    },
     place: {
       type: String,
       minlength: 2,
       maxlength: 30,
-      required: [true, "Place required"],
+      // required: [true, "Place required"],
     },
     age: {
       type: String,
       minlength: 2,
       maxlength: 30,
-      required: [true, "Age required"],
+      // required: [true, "Age required"],
     },
     favorite: {
       type: Boolean,
       minlength: 2,
       maxlength: 30,
       default: false,
-      required: [true, "Favorite required"],
+      // required: [true, "Favorite required"],
     },
     lovation: {
       type: String,
@@ -55,6 +67,11 @@ const notices = new Schema(
     price: {
       type: String,
       // required: [true, "Price required"],
+    },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "users",
+      required: true,
     },
   },
 
