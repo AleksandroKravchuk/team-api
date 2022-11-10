@@ -6,7 +6,6 @@ const avatarsDir = path.join("public", "pets");
 
 const addPetInfo = async (req, res) => {
   const { comments } = req.body;
-  // console.log(comments);
   if (!req.file) {
     throw RequestError(400, "file required");
   }

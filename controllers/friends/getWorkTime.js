@@ -3,7 +3,6 @@ const { RequestError } = require("../../helpers");
 
 const getWorkTime = async (req, res) => {
   const { id } = req.params;
-  // console.log(id);
   // eslint-disable-next-line no-undef
   const owner = `ObjectId('${id}')`;
   const results = await WorkTimes.find({ owner });

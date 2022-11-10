@@ -5,7 +5,6 @@ const getAllNotices = async (req, res) => {
   let { value } = req.params;
   const { page = 1, limit = 8 } = req.query;
   const skip = (page - 1) * limit;
-  // if (favorite === null) {
   if (value === "for-free") {
     value = "in good hands";
   }
@@ -24,18 +23,5 @@ const getAllNotices = async (req, res) => {
       notices: results,
     },
   });
-  // } else {
-  //   const results = await Pets.find({ owner, favorite }, "", {
-  //     skip,
-  //     limit,
-  //   }).populate("owner", "email");
-  //   res.json({
-  //     status: "success",
-  //     code: 200,
-  //     data: {
-  //       pets: results,
-  //     },
-  //   });
-  // }
 };
 module.exports = getAllNotices;
