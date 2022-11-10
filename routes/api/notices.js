@@ -20,13 +20,6 @@ router.post(
 
 // router.delete("/:id", authenticate, isValidId, ctrlWrapper(ctrl.deletePet));
 
-// router.put(
-//   "/:contactId",
-//   authenticate,
-//   isValidId,
-//   // schemas.bodyValidation,
-//   ctrlWrapper(ctrl.updateContact)
-// );
 
 router.patch(
   "/:id",
