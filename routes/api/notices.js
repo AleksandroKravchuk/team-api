@@ -14,7 +14,7 @@ router.get("/owner/own", authenticate, ctrlWrapper(ctrl.getNoticesOwn));
 router.post(
   "/",
   authenticate,
-  schemasNotice.noticeValidation,
+  // schemasNotice.noticeValidation,
   ctrlWrapper(ctrl.addNotices)
 );
 
