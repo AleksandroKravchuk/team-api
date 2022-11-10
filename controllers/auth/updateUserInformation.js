@@ -4,7 +4,6 @@ const { RequestError } = require("../../helpers");
 const updateUserInformation = async (req, res) => {
   const { id } = req.user;
   const { name, city, phone, birthday, email } = req.body;
-  try {
     const updateUserInfo = await User.findByIdAndUpdate(
       id,
       { name, city, phone, birthday, email },
@@ -26,8 +25,5 @@ const updateUserInformation = async (req, res) => {
         },
       },
     });
-  } catch (error) {
-    throw RequestError(400, "User update failed.");
-  }
 };
 module.exports = updateUserInformation;

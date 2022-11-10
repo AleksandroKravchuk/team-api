@@ -1,11 +1,13 @@
 const { Schema, model } = require("mongoose");
-const Joi = require("joi");
+const JoiBase = require("joi");
+const JoiDate = require("@hapi/joi-date");
+const Joi = JoiBase.extend(JoiDate);
 const { handleSaveErrors } = require("../helpers");
 const userSchema = new Schema(
   {
     password: {
       type: String,
-      minlength: 6,
+      minlength: 7,
       required: [true, "Set password for user"],
     },
     email: {
@@ -15,14 +17,12 @@ const userSchema = new Schema(
     },
     name: {
       type: String,
-      // enum: ["starter", "pro", "business"],
-      // unique: true,
     },
     city: {
       type: String,
     },
     phone: {
-      type: Number,
+      type: String,
       // unique: true,
     },
     birthday: {
@@ -45,14 +45,14 @@ const User = model("users", userSchema);
 const schemasAuth = {
   userValidation: (req, res, next) => {
     const schema = Joi.object({
-      name: Joi.string().alphanum().min(2).max(50),
+      name: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{2,30}")),
       email: Joi.string().email({
         minDomainSegments: 2,
         tlds: { allow: ["com", "net", "ua"] },
       }),
-      birthday: Joi.string(),
-      phone: Joi.number(),
-      city: Joi.string().alphanum().min(2).max(50),
+      birthday: Joi.date().format("DD.MM.YYYY").raw().less("now"),
+      phone: Joi.string().regex(new RegExp("^[0-9]{12}$")),
+      city: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,50}")),
     });
     const validateUser = schema.validate(req.body);
     if (validateUser.error) {
@@ -62,7 +62,12 @@ const schemasAuth = {
   },
   loginValidation: (req, res, next) => {
     const schema = Joi.object({
-      password: Joi.string().alphanum().min(2).max(30).required(),
+      password: Joi.string()
+        .pattern(new RegExp("^[a-zA-Z0-9]{7,32}$"))
+        .required(),
+      // .description(
+      //   "password must include numbers or uppercase or lowercase letters without spaces between 7 and 32 characters"
+      // ),
       email: Joi.string()
         .email({
           minDomainSegments: 2,
@@ -72,15 +77,17 @@ const schemasAuth = {
     });
     const validateLogin = schema.validate(req.body);
     if (validateLogin.error) {
-      return res.status(400).json({ message: `${validateLogin.error}` });
+      return res
+        .status(400)
+        .json({ status: "error", message: `${validateLogin.error}` });
     }
     next();
   },
   addInfoValidation: (req, res, next) => {
     const schema = Joi.object({
-      name: Joi.string().alphanum().required(),
-      city: Joi.string().alphanum().required(),
-      phone: Joi.number().required(),
+      name: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{2,30}")).required(),
+      city: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,50}")).required(),
+      phone: Joi.string().regex(new RegExp("^[0-9]{12}$")).required(),
     });
     const validateLogin = schema.validate(req.body);
     if (validateLogin.error) {

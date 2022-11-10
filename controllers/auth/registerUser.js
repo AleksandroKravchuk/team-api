@@ -11,26 +11,22 @@ const registerUser = async (req, res) => {
   if (user) {
     throw RequestError(409, "Email in use");
   } else {
-    try {
-      const newUser = await User.create({
-        email,
-        password: hashPassword,
-      });
+    const newUser = await User.create({
+      email,
+      password: hashPassword,
+    });
 
-      res.status(201).json({
-        code: 201,
-        status: "success",
-        message: "User created.",
-        data: {
-          user: {
-            email: newUser.email,
-            id: newUser._id,
-          },
+    res.status(201).json({
+      code: 201,
+      status: "success",
+      message: "User created.",
+      data: {
+        user: {
+          email: newUser.email,
+          id: newUser._id,
         },
-      });
-    } catch (error) {
-      throw RequestError(400, "User creation error.");
-    }
+      },
+    });
   }
 };
 module.exports = registerUser;

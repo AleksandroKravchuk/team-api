@@ -1,5 +1,7 @@
 const { Schema, model } = require("mongoose");
-
+const JoiBase = require("joi");
+const JoiDate = require("@hapi/joi-date");
+const Joi = JoiBase.extend(JoiDate);
 const { handleSaveErrors } = require("../helpers");
 
 const notices = new Schema(
@@ -79,5 +81,33 @@ const notices = new Schema(
 );
 notices.post("save", handleSaveErrors);
 const Notices = model("notices", notices);
+const schemasNotice = {
+  noticeValidation: (req, res, next) => {
+    const schema = Joi.object({
+      title: Joi.string,
+      name: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,16}")),
+      birth: Joi.date().format("DD.MM.YYYY").raw().less("now"),
+      breed: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,16}")),
+    });
+    const validateUser = schema.validate(req.body);
+    if (validateUser.error) {
+      return res.status(400).json({ message: `${validateUser.error}` });
+    }
+    next();
+  },
+  noticeAddValidation: (req, res, next) => {
+    const schema = Joi.object({
+      sex: Joi.string,
+      location: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,30}")),
+      price: Joi.string().pattern(new RegExp("^[a-zA-Z]{1,20}")),
+      comments: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,200}")),
+    });
+    const validateUser = schema.validate(req.body);
+    if (validateUser.error) {
+      return res.status(400).json({ message: `${validateUser.error}` });
+    }
+    next();
+  },
+};
 
-module.exports = { Notices };
+module.exports = { Notices, schemasNotice };

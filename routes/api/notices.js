@@ -1,5 +1,5 @@
 const express = require("express");
-// const { schemas } = require("../../models/schemasNotices");
+const { schemasNotice } = require("../../models/schemasNotices");
 const { ctrlWrapper } = require("../../helpers");
 const router = express.Router();
 const { notices: ctrl } = require("../../controllers");
@@ -14,7 +14,7 @@ router.get("/owner/own", authenticate, ctrlWrapper(ctrl.getNoticesOwn));
 router.post(
   "/",
   authenticate,
-  //   schemas.petsValidation,
+  schemasNotice.noticeValidation,
   ctrlWrapper(ctrl.addNotices)
 );
 
@@ -32,7 +32,7 @@ router.patch(
   "/:id",
   // authenticate,
   isValidId,
-  // schemas.addPetsValidation,
+  schemasNotice.noticeAddValidation,
   upload.single("photoNotices"),
   ctrlWrapper(ctrl.createNotice)
 );

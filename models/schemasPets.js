@@ -1,5 +1,7 @@
 const { Schema, model } = require("mongoose");
-const Joi = require("joi");
+const JoiBase = require("joi");
+const JoiDate = require("@hapi/joi-date");
+const Joi = JoiBase.extend(JoiDate);
 const { handleSaveErrors } = require("../helpers");
 
 const pets = new Schema(
@@ -9,40 +11,33 @@ const pets = new Schema(
       type: String,
       minlength: 2,
       maxlength: 20,
-      // required: [true, "Name is required"],
     },
     birth: {
       type: String,
       minlength: 2,
       maxlength: 10,
-      // require: [true, "birth is required"],
     },
     breed: {
       type: String,
       minlength: 2,
       maxlength: 20,
-      // required: [true, "Breed is required"],
     },
     comments: {
       type: String,
       minlength: 2,
       maxlength: 200,
-      // required: [true, "Comments required"],
     },
     lovation: {
       type: String,
       minlength: 2,
       maxlength: 20,
-      // required: [true, "Lovation required"],
     },
     sex: {
       type: String,
       enum: ["male", "female"],
-      // required: [true, "Sex required"],
     },
     price: {
       type: Number,
-      // required: [true, "Price required"],
     },
     owner: {
       type: Schema.Types.ObjectId,
@@ -60,27 +55,15 @@ const schemas = {
   petsValidation: (req, res, next) => {
     const schema = Joi.object({
       name: Joi.string().alphanum().min(2).max(30).required(),
-      birth: Joi.string().required(),
+      birth: Joi.date().format("DD.MM.YYYY").raw().less("now").required(),
       breed: Joi.string().required(),
     });
     const validateBody = schema.validate(req.body);
     if (validateBody.error) {
-      return res.status(400).json({ message: "missing required name field" });
+      return res.status(400).json({ message: `${validateBody.error}` });
     }
     next();
   },
-  // addPetsValidation: (req, res, next) => {
-  //   const schema = Joi.object({
-  //     // comments: Joi.string().required(),
-  //     // photoPet: Joi.string().required(),
-  //     // comments: Joi.string().alphanum().min(5).max(300).required(),
-  //   });
-  //   const validateBody = schema.validate(req.body);
-  //   if (validateBody.error) {
-  //     return res.status(400).json({ message: validateBody.error });
-  //   }
-  //   next();
-  // },
 };
 
 module.exports = { Pets, schemas };
