@@ -47,17 +47,11 @@ const notices = new Schema(
       maxlength: 30,
       // required: [true, "Age required"],
     },
-    favorite: {
-      type: Boolean,
-      minlength: 2,
-      maxlength: 30,
-      default: false,
-      // required: [true, "Favorite required"],
-    },
-    lovation: {
+    favorite: [String],
+    location: {
       type: String,
       minlength: 2,
-      maxlength: 20,
+      maxlength: 50,
       // required: [true, "Lovation required"],
     },
     sex: {
@@ -88,6 +82,7 @@ const schemasNotice = {
       name: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,16}")),
       birth: Joi.date().format("DD.MM.YYYY").raw().less("now"),
       breed: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,16}")),
+      category: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,40}")),
     });
     const validateUser = schema.validate(req.body);
     if (validateUser.error) {
@@ -96,6 +91,7 @@ const schemasNotice = {
     next();
   },
   noticeAddValidation: (req, res, next) => {
+    console.log(req.body);
     const schema = Joi.object({
       sex: Joi.string,
       location: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,30}")),

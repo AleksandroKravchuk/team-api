@@ -12,10 +12,10 @@ const createNotice = async (req, res) => {
   if (!req.file) {
     throw RequestError(400, "file required");
   }
-  if (!comments || !sex || !location || !price) {
-    throw RequestError(400, "All fields are required");
-  }
-  
+  // if (!comments || !sex || !location || !price) {
+  //   throw RequestError(400, "All fields are required");
+  // }
+
   // if (sex !== "male" || sex !== "female") {
   //   throw RequestError(400, "sex should be male or female");
   // }

@@ -27,7 +27,7 @@ const userSchema = new Schema(
     },
     birthday: {
       type: String,
-      default: "00:00:0000",
+      default: "00.00.0000",
     },
     avatarURL: {
       type: String,

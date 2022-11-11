@@ -3,7 +3,11 @@ const { RequestError } = require("../../helpers");
 
 const getNoticeById = async (req, res) => {
   const { id } = req.params;
-  const result = await Notices.findById(id);
+  const result = await Notices.findById(id).populate("owner", [
+    "email",
+    "phone",
+  ]);
+
   if (!result) {
     throw RequestError(404, `Not found notice id: ${id}`);
   } else {
