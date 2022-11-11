@@ -8,8 +8,13 @@ const { authenticate, isValidId, upload } = require("../../middleware");
 router.get("/:value", ctrlWrapper(ctrl.getAllNotices));
 router.get("/one/:id", ctrlWrapper(ctrl.getNoticeById));
 
-router.get("/owner/own", authenticate, ctrlWrapper(ctrl.getNoticesOwn));
-// router.get("/:contactId", authenticate, ctrlWrapper(ctrl.getById));
+router.get("/one/owner", authenticate, ctrlWrapper(ctrl.getNoticesOwn));
+// router.get(
+//   "/one/favorite",
+//   // schemasNotice.noticeFavorite,
+//   authenticate,
+//   ctrlWrapper(ctrl.getFavoriteNotice)
+// );
 
 router.post(
   "/",
@@ -19,7 +24,14 @@ router.post(
 );
 
 // router.delete("/:id", authenticate, isValidId, ctrlWrapper(ctrl.deletePet));
-
+router.patch(
+  "/favorite/:noticeId",
+  authenticate,
+  // isValidId,
+  // schemasNotice.noticeAddValidation,
+  // upload.single("photoNotices"),
+  ctrlWrapper(ctrl.addNoticeFavorite)
+);
 
 router.patch(
   "/:id",

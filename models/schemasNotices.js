@@ -91,12 +91,21 @@ const schemasNotice = {
     next();
   },
   noticeAddValidation: (req, res, next) => {
-    console.log(req.body);
     const schema = Joi.object({
-      sex: Joi.string,
+      sex: Joi.string(),
       location: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,30}")),
       price: Joi.string().pattern(new RegExp("^[a-zA-Z]{1,20}")),
       comments: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,200}")),
+    });
+    const validateUser = schema.validate(req.body);
+    if (validateUser.error) {
+      return res.status(400).json({ message: `${validateUser.error}` });
+    }
+    next();
+  },
+  noticeFavorite: (req, res, next) => {
+    const schema = Joi.object({
+      favorite: Joi.string(),
     });
     const validateUser = schema.validate(req.body);
     if (validateUser.error) {
