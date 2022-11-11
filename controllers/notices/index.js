@@ -5,6 +5,7 @@ const getNoticesOwn = require("./getNoticesOwner");
 const getNoticeById = require("./getNoticeById");
 const addNoticeFavorite = require("./addNoticeFavorite");
 const getFavoriteNotice = require("./getFavoriteNotice");
+const deleteNoticeFavorite = require("./deleteNoticeFavorite");
 
 module.exports = {
   getAllNotices,
@@ -14,4 +15,5 @@ module.exports = {
   getNoticeById,
   addNoticeFavorite,
   getFavoriteNotice,
+  deleteNoticeFavorite,
 };

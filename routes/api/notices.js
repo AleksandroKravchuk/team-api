@@ -9,12 +9,12 @@ router.get("/:value", ctrlWrapper(ctrl.getAllNotices));
 router.get("/one/:id", ctrlWrapper(ctrl.getNoticeById));
 
 router.get("/one/owner", authenticate, ctrlWrapper(ctrl.getNoticesOwn));
-// router.get(
-//   "/one/favorite",
-//   // schemasNotice.noticeFavorite,
-//   authenticate,
-//   ctrlWrapper(ctrl.getFavoriteNotice)
-// );
+router.get(
+  "/ones/favorite",
+  // schemasNotice.noticeFavorite,
+  authenticate,
+  ctrlWrapper(ctrl.getFavoriteNotice)
+);
 
 router.post(
   "/",
@@ -25,14 +25,21 @@ router.post(
 
 // router.delete("/:id", authenticate, isValidId, ctrlWrapper(ctrl.deletePet));
 router.patch(
-  "/favorite/:noticeId",
+  "/addfavorite/:noticeId",
   authenticate,
   // isValidId,
   // schemasNotice.noticeAddValidation,
   // upload.single("photoNotices"),
   ctrlWrapper(ctrl.addNoticeFavorite)
 );
-
+router.patch(
+  "/deletefavorite/:noticeId",
+  authenticate,
+  // isValidId,
+  // schemasNotice.noticeAddValidation,
+  // upload.single("photoNotices"),
+  ctrlWrapper(ctrl.deleteNoticeFavorite)
+);
 router.patch(
   "/:id",
   // authenticate,

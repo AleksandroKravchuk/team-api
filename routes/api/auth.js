@@ -3,7 +3,7 @@ const router = express.Router();
 const { ctrlWrapper } = require("../../helpers");
 const { schemasAuth } = require("../../models/schemasAuth");
 const { auth: ctrl, files: ctrlFs } = require("../../controllers");
-const { authenticate, upload } = require("../../middleware");
+const { authenticate, upload, isValidId } = require("../../middleware");
 
 router.post(
   "/register",
@@ -16,6 +16,7 @@ router.get("/current", authenticate, ctrlWrapper(ctrl.getCurrentUser));
 
 router.patch(
   "/register/:id",
+  isValidId,
   schemasAuth.addInfoValidation,
   ctrlWrapper(ctrl.addRegisterInformation)
 );
