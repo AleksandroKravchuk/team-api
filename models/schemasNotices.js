@@ -47,7 +47,10 @@ const notices = new Schema(
       maxlength: 30,
       // required: [true, "Age required"],
     },
-    favorite: [String],
+    favorite: {
+      type: Boolean,
+      default: false,
+    },
     location: {
       type: String,
       minlength: 2,
