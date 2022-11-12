@@ -1,12 +1,15 @@
 const { Notices } = require("../../models/schemasNotices");
 const { RequestError } = require("../../helpers");
 
-const changeFavorite = async (req, res) => {
+const removeNoticeById = async (req, res) => {
   const { id } = req.params;
-  const result = await Notices.findByIdAndUpdate(id, req.body, { new: true });
+  const result = await Notices.findByIdAndRemove(id);
   if (!result) {
     throw RequestError(404, "Not found");
   }
-  res.json(result);
+  res.json({
+    message: "Notice removed",
+  });
 };
-module.exports = changeFavorite;
+
+module.exports = removeNoticeById;

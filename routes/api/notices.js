@@ -9,6 +9,7 @@ router.get("/:value", ctrlWrapper(ctrl.getAllNotices));
 router.get("/one/:id", ctrlWrapper(ctrl.getNoticeById));
 
 router.get("/owner/own", authenticate, ctrlWrapper(ctrl.getNoticesOwn));
+
 // router.get("/:contactId", authenticate, ctrlWrapper(ctrl.getById));
 
 router.post(
@@ -20,7 +21,6 @@ router.post(
 
 // router.delete("/:id", authenticate, isValidId, ctrlWrapper(ctrl.deletePet));
 
-
 router.patch(
   "/:id",
   // authenticate,
@@ -28,6 +28,30 @@ router.patch(
   schemasNotice.noticeAddValidation,
   upload.single("photoNotices"),
   ctrlWrapper(ctrl.createNotice)
+);
+router.patch(
+  "/:id/favorite",
+  authenticate,
+  isValidId,
+  ctrlWrapper(ctrl.changeFavorite)
+);
+router.delete(
+  "/:id/favorite",
+  authenticate,
+  isValidId,
+  ctrlWrapper(ctrl.removeFavorite)
+);
+
+router.delete(
+  "/:id",
+  authenticate,
+  isValidId,
+  ctrlWrapper(ctrl.removeNoticeById)
+);
+router.get(
+  "/owner/favorite",
+  authenticate,
+  ctrlWrapper(ctrl.getFavoriteNotice)
 );
 
 module.exports = router;
