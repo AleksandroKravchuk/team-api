@@ -9,8 +9,9 @@ const getAllFriends = async (req, res) => {
     limit,
   });
   res.json({
-    status: "success",
     code: 200,
+    status: "success",
+    message: "all friends",
     data: {
       friends: results,
     },

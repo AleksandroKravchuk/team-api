@@ -15,7 +15,7 @@ const addNoticeFavorite = async (req, res) => {
   }
   res.status(200).json({
     code: 200,
-    status: "The user information updated",
+    status: "Notice added to favorite",
     data: {
       notice: result,
     },

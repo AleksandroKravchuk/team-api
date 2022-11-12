@@ -9,8 +9,9 @@ const getAllNews = async (req, res) => {
     limit,
   });
   res.json({
-    status: "success",
     code: 200,
+    status: "success",
+    message: "all news",
     data: { news: results },
   });
 };

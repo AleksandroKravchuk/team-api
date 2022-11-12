@@ -6,6 +6,7 @@ const avatarsDir = path.join("public", "pets");
 
 const addPetInfo = async (req, res) => {
   const { comments } = req.body;
+  const { _id: owner } = req.user;
   if (!req.file) {
     throw RequestError(400, "file required");
   }
@@ -14,7 +15,7 @@ const addPetInfo = async (req, res) => {
   }
   try {
     const { id } = req.params;
-    const { comments } = req.body;
+    const { body } = req;
     const { path: tempUpload, originalname } = req.file;
     const extension = originalname.split(".").pop();
     const filename = `${id}.${extension}`;
@@ -40,7 +41,7 @@ const addPetInfo = async (req, res) => {
       const photoPet = path.join("pets", filename);
       const result = await Pets.findByIdAndUpdate(
         id,
-        { comments, photoPet },
+        { ...body, photoPet, owner },
         { new: true }
       );
       if (!result) {

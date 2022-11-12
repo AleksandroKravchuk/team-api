@@ -4,22 +4,26 @@ const { handleSaveErrors } = require("../helpers");
 
 const friends = new Schema(
   {
-    name: {
+    title: {
       type: String,
     },
-    logo: {
+    url: {
       type: String,
     },
-    time: {
+    addressUrl: {
+      type: String,
+    },
+    imageUrl: {
       type: String,
     },
     address: {
       type: String,
     },
-    email: {
+    workDays: [Object],
+    phone: {
       type: String,
     },
-    phone: {
+    email: {
       type: String,
     },
   },

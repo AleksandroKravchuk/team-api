@@ -23,7 +23,7 @@ router.post(
   ctrlWrapper(ctrl.addNotices)
 );
 
-// router.delete("/:id", authenticate, isValidId, ctrlWrapper(ctrl.deletePet));
+router.delete("/:id", authenticate, isValidId, ctrlWrapper(ctrl.deleteNotice));
 router.patch(
   "/addfavorite/:noticeId",
   authenticate,

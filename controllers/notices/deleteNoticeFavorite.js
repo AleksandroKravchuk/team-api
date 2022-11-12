@@ -15,7 +15,7 @@ const deleteNoticeFavorite = async (req, res) => {
   }
   res.status(200).json({
     code: 200,
-    status: "The user information updated",
+    status: "delete favorite into notices",
     data: {
       notice: result,
     },

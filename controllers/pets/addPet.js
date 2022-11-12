@@ -8,7 +8,7 @@ const addPet = async (req, res) => {
   res.json({
     status: "success",
     code: 201,
-    message: "Pet success created",
+    message: "Pet success added",
     data: { pet: result },
   });
 };

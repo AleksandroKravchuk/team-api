@@ -8,7 +8,7 @@ const { authenticate, isValidId, upload } = require("../../middleware");
 router.get("/", authenticate, ctrlWrapper(ctrl.getAllPets));
 
 router.post(
-  "/",
+  "/add",
   authenticate,
   schemas.petsValidation,
   ctrlWrapper(ctrl.addPet)

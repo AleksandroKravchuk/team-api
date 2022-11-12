@@ -7,7 +7,7 @@ const { authenticate } = require("../../middleware");
 
 router.get("/", authenticate, ctrlWrapper(ctrl.getUserInformation));
 router.patch(
-  "/",
+  "/update",
   authenticate,
   schemasAuth.userValidation,
   ctrlWrapper(ctrl.updateUserInformation)

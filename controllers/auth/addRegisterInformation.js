@@ -8,7 +8,7 @@ const { RequestError } = require("../../helpers");
 const addRegisterInformation = async (req, res) => {
   const { id } = req.params;
   const { name, city, phone } = req.body;
-  console.log(id);
+
   const secureUrl = gravatar.url(name, { s: "100", r: "x", d: "retro" }, true);
   const payload = {
     id,
@@ -23,7 +23,7 @@ const addRegisterInformation = async (req, res) => {
     throw RequestError(400, `Not found user id:${id}`);
   }
   res.status(201).json({
-    code: 200,
+    code: 201,
     status: "The user was successfully registered.",
     data: {
       user: {

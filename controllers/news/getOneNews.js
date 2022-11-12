@@ -8,8 +8,9 @@ const getNewsById = async (req, res) => {
     throw RequestError(404, `Not found news id: ${id}`);
   } else {
     res.json({
-      status: "success",
       code: 200,
+      status: "success",
+      message: "one news",
       data: { news: result },
     });
   }
