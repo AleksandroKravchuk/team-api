@@ -6,6 +6,7 @@ const avatarsDir = path.join("public", "notices");
 
 const createNotice = async (req, res) => {
   const { id } = req.params;
+  // console.log(req.body);
   const { sex, location, price, comments } = req.body;
   // const update = { $push: { favorite: [id] } };
 

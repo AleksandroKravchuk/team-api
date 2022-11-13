@@ -10,41 +10,49 @@ const notices = new Schema(
     category: {
       type: String,
       enum: ["sell", "lost-found", "in good hands"],
+      required: [
+        true,
+        "Category is required one of sell, lost-found, in good hands",
+      ],
     },
     title: {
       type: String,
       minlength: 2,
       maxlength: 100,
-      // required: [true, "Title is required"],
+      required: [true, "Title is required"],
     },
     name: {
       type: String,
       minlength: 2,
       maxlength: 30,
-      // required: [true, "Name is required"],
+      required: [true, "Name is required"],
     },
     breed: {
       type: String,
       minlength: 2,
       maxlength: 20,
+      // default: "",
       // required: [true, "Breed is required"],
     },
     birth: {
       type: String,
       minlength: 2,
       maxlength: 20,
+      // default: "",
       // required: [true, "Birth is required"],
     },
     place: {
       type: String,
       minlength: 2,
       maxlength: 30,
+      // default: "",
       // required: [true, "Place required"],
     },
     age: {
       type: String,
       minlength: 2,
       maxlength: 30,
+      // default: "",
       // required: [true, "Age required"],
     },
     favorite: [String],
@@ -57,10 +65,12 @@ const notices = new Schema(
     sex: {
       type: String,
       enum: ["male", "female"],
+      // default: "",
       // required: [true, "Sex required"],
     },
     price: {
       type: String,
+      // default: "",
       // required: [true, "Price required"],
     },
     comments: { type: String },
@@ -92,27 +102,19 @@ const schemasNotice = {
   },
   noticeAddValidation: (req, res, next) => {
     const schema = Joi.object({
-      sex: Joi.string(),
+      sex: Joi.string().pattern(new RegExp("^[a-z]{4,6}$")),
       location: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,30}")),
-      price: Joi.string().pattern(new RegExp("^[a-zA-Z]{1,20}")),
-      comments: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,200}")),
+      price: Joi.string().pattern(new RegExp("^[0-9]{1,4}$")),
+      comments: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{2,200}")),
     });
+
     const validateUser = schema.validate(req.body);
+
     if (validateUser.error) {
       return res.status(400).json({ message: `${validateUser.error}` });
     }
     next();
   },
-  // noticeFavorite: (req, res, next) => {
-  //   const schema = Joi.object({
-  //     favorite: Joi.string(),
-  //   });
-  //   const validateUser = schema.validate(req.body);
-  //   if (validateUser.error) {
-  //     return res.status(400).json({ message: `${validateUser.error}` });
-  //   }
-  //   next();
-  // },
 };
 
 module.exports = { Notices, schemasNotice };

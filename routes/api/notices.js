@@ -49,8 +49,8 @@ router.patch(
   "/:id",
   authenticate,
   isValidId,
-  schemasNotice.noticeAddValidation,
   upload.single("photoNotices"),
+  schemasNotice.noticeAddValidation,
   ctrlWrapper(ctrl.createNotice)
 );
 
