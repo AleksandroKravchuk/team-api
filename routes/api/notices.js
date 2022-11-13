@@ -42,7 +42,7 @@ router.patch(
 );
 router.patch(
   "/:id",
-  // authenticate,
+  authenticate,
   isValidId,
   schemasNotice.noticeAddValidation,
   upload.single("photoNotices"),
