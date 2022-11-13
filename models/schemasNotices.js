@@ -103,16 +103,16 @@ const schemasNotice = {
     }
     next();
   },
-  noticeFavorite: (req, res, next) => {
-    const schema = Joi.object({
-      favorite: Joi.string(),
-    });
-    const validateUser = schema.validate(req.body);
-    if (validateUser.error) {
-      return res.status(400).json({ message: `${validateUser.error}` });
-    }
-    next();
-  },
+  // noticeFavorite: (req, res, next) => {
+  //   const schema = Joi.object({
+  //     favorite: Joi.string(),
+  //   });
+  //   const validateUser = schema.validate(req.body);
+  //   if (validateUser.error) {
+  //     return res.status(400).json({ message: `${validateUser.error}` });
+  //   }
+  //   next();
+  // },
 };
 
 module.exports = { Notices, schemasNotice };

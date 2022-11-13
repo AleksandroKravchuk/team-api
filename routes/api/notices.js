@@ -10,7 +10,7 @@ router.get("/one/:id", ctrlWrapper(ctrl.getNoticeById));
 
 router.get("/one/owner", authenticate, ctrlWrapper(ctrl.getNoticesOwn));
 router.get(
-  "/ones/favorite",
+  "/one/favorite",
   // schemasNotice.noticeFavorite,
   authenticate,
   ctrlWrapper(ctrl.getFavoriteNotice)
@@ -23,7 +23,12 @@ router.post(
   ctrlWrapper(ctrl.addNotices)
 );
 
-router.delete("/:id", authenticate, isValidId, ctrlWrapper(ctrl.deleteNotice));
+router.delete(
+  "/delete/:id",
+  authenticate,
+  isValidId,
+  ctrlWrapper(ctrl.deleteNotice)
+);
 router.patch(
   "/addfavorite/:noticeId",
   authenticate,
