@@ -8,9 +8,9 @@ const { authenticate, isValidId, upload } = require("../../middleware");
 router.get("/:value", ctrlWrapper(ctrl.getAllNotices));
 router.get("/one/:id", ctrlWrapper(ctrl.getNoticeById));
 
-router.get("/one/owner", authenticate, ctrlWrapper(ctrl.getNoticesOwn));
+router.get("/find/owner", authenticate, ctrlWrapper(ctrl.getNoticesOwn));
 router.get(
-  "/one/favorite",
+  "/find/favorite",
   // schemasNotice.noticeFavorite,
   authenticate,
   ctrlWrapper(ctrl.getFavoriteNotice)
