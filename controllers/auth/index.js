@@ -5,6 +5,8 @@ const getCurrentUser = require("./getCurrentUser");
 const addRegisterInformation = require("./addRegisterInformation");
 const getUserInformation = require("./getUserInformation");
 const updateUserInformation = require("./updateUserInformation");
+const authCheck = require("./authCheck");
+const authRegister= require("./authRegister");
 
 module.exports = {
   registerUser,
@@ -14,4 +16,6 @@ module.exports = {
   addRegisterInformation,
   getUserInformation,
   updateUserInformation,
+  authCheck,
+  authRegister,
 };
