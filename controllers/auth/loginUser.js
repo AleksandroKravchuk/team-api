@@ -19,10 +19,10 @@ const loginUser = async (req, res) => {
     } else {
       try {
         const payload = {
-          id: user._id,
+          email,
         };
         const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "10h" });
-        await User.findByIdAndUpdate(user._id, { token });
+        await User.findOneAndUpdate(email, { token });
         res.status(200).json({
           code: 200,
           status: "success",

@@ -60,6 +60,25 @@ const schemasAuth = {
     }
     next();
   },
+  userREgister: (req, res, next) => {
+    const schema = Joi.object({
+      name: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{2,30}")),
+      email: Joi.string().email({
+        minDomainSegments: 2,
+        tlds: { allow: ["com", "net", "ua"] },
+      }),
+      password: Joi.string()
+        .pattern(new RegExp("^[a-zA-Z0-9]{7,32}$"))
+        .required(),
+      phone: Joi.string().regex(new RegExp("^[0-9]{12}$")),
+      city: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,50}")),
+    });
+    const validateUser = schema.validate(req.body);
+    if (validateUser.error) {
+      return res.status(400).json({ message: `${validateUser.error}` });
+    }
+    next();
+  },
   loginValidation: (req, res, next) => {
     const schema = Joi.object({
       password: Joi.string()

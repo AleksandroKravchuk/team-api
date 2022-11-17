@@ -27,5 +27,14 @@ router.patch(
   upload.single("avatar"),
   ctrlWrapper(ctrlFs.updateAvatar)
 );
-
+router.post(
+  "/auth/register",
+  schemasAuth.userREgister,
+  ctrlWrapper(ctrl.authRegister)
+);
+router.post(
+  "/auth/check",
+  schemasAuth.loginValidation,
+  ctrlWrapper(ctrl.authCheck)
+);
 module.exports = router;

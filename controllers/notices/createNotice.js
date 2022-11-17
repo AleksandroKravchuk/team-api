@@ -5,7 +5,7 @@ const { configImg, RequestError } = require("../../helpers");
 const avatarsDir = path.join("public", "notices");
 
 const createNotice = async (req, res) => {
-  const { id } = req.params;
+  const { email } = req.user;
   // console.log(req.body);
   const { sex, location, price, comments } = req.body;
   // const update = { $push: { favorite: [id] } };
@@ -23,7 +23,7 @@ const createNotice = async (req, res) => {
   try {
     const { path: tempUpload, originalname } = req.file;
     const extension = originalname.split(".").pop();
-    const filename = `${id}.${extension}`;
+    const filename = `${email}.${extension}`;
     if (
       extension === "jpeg" ||
       extension === "png" ||

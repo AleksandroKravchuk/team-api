@@ -2,15 +2,15 @@ const { User } = require("../../models/schemasAuth");
 const { RequestError } = require("../../helpers");
 
 const getUserInformation = async (req, res) => {
-  const { id } = req.user;
-  const result = await User.findById(id);
+  const { email } = req.user;
+  const result = await User.findOne(email);
   if (!result) {
-    throw RequestError(404, `Not found contact id: ${id}`);
+    throw RequestError(404, `Not found user email: ${email}`);
   } else {
     res.json({
       status: "success",
       code: 200,
-      message:"user information",
+      message: "user information",
       data: {
         user: {
           name: result.name,

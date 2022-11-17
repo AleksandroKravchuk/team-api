@@ -10,7 +10,7 @@ const updateAvatar = async (req, res) => {
     throw RequestError(400, "no file");
   }
   try {
-    const { _id } = req.user;
+    const { email } = req.user;
     const { path: tempUpload, originalname } = req.file;
     const extension = originalname.split(".").pop();
     const filename = `${_id}.${extension}`;
@@ -35,7 +35,7 @@ const updateAvatar = async (req, res) => {
       await fs.unlink(tempUpload);
       const avatarURL = path.join("avatars", filename);
 
-      await User.findByIdAndUpdate(_id, { avatarURL }, { new: true });
+      await User.findOneAndUpdate(email, { avatarURL }, { new: true });
       res.status(200).json({
         code: 200,
         status: "success",

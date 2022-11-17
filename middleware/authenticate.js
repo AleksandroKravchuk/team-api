@@ -11,8 +11,8 @@ const authenticate = async (req, res, next) => {
       throw RequestError(401, "Missing header with authorization token.");
     } else {
       try {
-        const { id } = jwt.verify(token, SECRET_KEY);
-        const user = await User.findById(id);
+        const { email } = jwt.verify(token, SECRET_KEY);
+        const user = await User.findByOne(email);
         if (!user || !user.token) {
           throw RequestError(401, "Not authorized");
         } else {
