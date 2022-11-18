@@ -14,12 +14,12 @@ router.post(
   ctrlWrapper(ctrl.addPet)
 );
 
-router.delete(
-  "/delete/:id",
-  authenticate,
-  isValidId,
-  ctrlWrapper(ctrl.deletePet)
-);
+// router.delete(
+//   "/delete/:id",
+//   authenticate,
+//   isValidId,
+//   ctrlWrapper(ctrl.deletePet)
+// );
 
 // router.put(
 //   "/:contactId",

@@ -6,7 +6,8 @@ const addRegisterInformation = require("./addRegisterInformation");
 const getUserInformation = require("./getUserInformation");
 const updateUserInformation = require("./updateUserInformation");
 const authCheck = require("./authCheck");
-const authRegister= require("./authRegister");
+const authRegister = require("./authRegister");
+const deletePet = require("./deletePet");
 
 module.exports = {
   registerUser,
@@ -18,4 +19,5 @@ module.exports = {
   updateUserInformation,
   authCheck,
   authRegister,
+  deletePet,
 };
