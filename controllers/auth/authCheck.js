@@ -12,6 +12,10 @@ const authCheck = async (req, res) => {
       code: 200,
       status: "success",
       message: "User may be created.",
+      user: {
+        email,
+        password,
+      },
     });
   }
 };
