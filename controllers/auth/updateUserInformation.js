@@ -5,7 +5,7 @@ const updateUserInformation = async (req, res) => {
   const { email } = req.user;
   const body = req;
   const updateUserInfo = await User.findOneAndUpdate(
-    email,
+    { email },
     { ...body },
     { new: true }
   );

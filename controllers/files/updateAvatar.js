@@ -35,7 +35,7 @@ const updateAvatar = async (req, res) => {
       await fs.unlink(tempUpload);
       const avatarURL = path.join("avatars", filename);
 
-      await User.findOneAndUpdate(email, { avatarURL }, { new: true });
+      await User.findOneAndUpdate({ email }, { avatarURL }, { new: true });
       res.status(200).json({
         code: 200,
         status: "success",

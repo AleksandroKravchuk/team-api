@@ -22,7 +22,7 @@ const loginUser = async (req, res) => {
           email,
         };
         const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "10h" });
-        await User.findOneAndUpdate(email, { token });
+        await User.findOneAndUpdate({ email }, { token });
         res.status(200).json({
           code: 200,
           status: "success",

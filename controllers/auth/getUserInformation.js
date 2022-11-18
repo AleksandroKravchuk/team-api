@@ -3,7 +3,7 @@ const { RequestError } = require("../../helpers");
 
 const getUserInformation = async (req, res) => {
   const { email } = req.user;
-  const result = await User.findOne(email);
+  const result = await User.findOne({ email });
   if (!result) {
     throw RequestError(404, `Not found user email: ${email}`);
   } else {
