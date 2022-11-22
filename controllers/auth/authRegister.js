@@ -11,20 +11,18 @@ const authRegister = async (req, res) => {
   const hashPassword = await bcrypt.hash(password, 10);
   const user = await User.findOne({ email });
   const secureUrl = gravatar.url(email, { s: "100", r: "x", d: "retro" }, true);
-  const payload = {
-    email,
-  };
-  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "10h" });
+  // const payload = {
+  //   email,
+  // };
+  // const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "10h" });
   if (user) {
     throw RequestError(409, "Email in use");
   } else {
     const newUser = await User.create({
-      
       email,
-      
       password: hashPassword,
       avatarURL: secureUrl,
-      token,
+      // token,
     });
 
     res.status(200).json({
@@ -34,12 +32,12 @@ const authRegister = async (req, res) => {
       data: {
         user: {
           email: newUser.email,
-          name: newUser.name,
-          city: newUser.city,
-          phone: newUser.phone,
+          // name: newUser.name,
+          // city: newUser.city,
+          // phone: newUser.phone,
           id: newUser._id,
           avatarURL: secureUrl,
-          token: newUser.token,
+          // token: newUser.token,
         },
       },
     });
