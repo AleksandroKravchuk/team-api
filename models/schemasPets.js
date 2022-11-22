@@ -40,9 +40,9 @@ const pets = new Schema(
       type: Number,
     },
     owner: {
-      type: Schema.Types.ObjectId,
+      type: String,
       ref: "users",
-      required: true,
+      // required: true,
     },
   },
 
@@ -57,6 +57,7 @@ const schemas = {
       name: Joi.string().alphanum().min(2).max(30).required(),
       birth: Joi.date().format("DD.MM.YYYY").raw().less("now").required(),
       breed: Joi.string().required(),
+      comments: Joi.string(),
     });
     const validateBody = schema.validate(req.body);
     if (validateBody.error) {

@@ -5,8 +5,8 @@ function configImg({
   tempUpload,
   filename,
   avatarsDir,
-  width = 100,
-  height = 100,
+  width = 300,
+  height = 300,
   quality,
 }) {
   Jimp.read(tempUpload)

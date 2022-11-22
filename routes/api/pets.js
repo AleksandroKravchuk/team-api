@@ -10,8 +10,9 @@ router.get("/", authenticate, ctrlWrapper(ctrl.getAllPets));
 router.post(
   "/add",
   authenticate,
+  upload.single("photoPet"),
   schemas.petsValidation,
-  ctrlWrapper(ctrl.addPet)
+  ctrlWrapper(ctrl.addPetInfo)
 );
 
 // router.delete(
@@ -29,13 +30,13 @@ router.post(
 //   ctrlWrapper(ctrl.updateContact)
 // );
 
-router.patch(
-  "/:id",
-  authenticate,
-  isValidId,
-  upload.single("photoPet"),
-  // schemas.addPetsValidation,
-  ctrlWrapper(ctrl.addPetInfo)
-);
+// router.patch(
+//   "/:id",
+//   authenticate,
+//   isValidId,
+//   upload.single("photoPet"),
+//   // schemas.addPetsValidation,
+//   ctrlWrapper(ctrl.addPetInfo)
+// );
 
 module.exports = router;

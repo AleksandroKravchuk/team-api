@@ -7,10 +7,10 @@ require("dotenv").config();
 const { RequestError } = require("../../helpers");
 
 const authRegister = async (req, res) => {
-  const { email, password, name, city, phone } = req.body;
+  const { email, password } = req.body;
   const hashPassword = await bcrypt.hash(password, 10);
   const user = await User.findOne({ email });
-  const secureUrl = gravatar.url(name, { s: "100", r: "x", d: "retro" }, true);
+  const secureUrl = gravatar.url(email, { s: "100", r: "x", d: "retro" }, true);
   const payload = {
     email,
   };
@@ -19,10 +19,9 @@ const authRegister = async (req, res) => {
     throw RequestError(409, "Email in use");
   } else {
     const newUser = await User.create({
-      name,
+      
       email,
-      city,
-      phone,
+      
       password: hashPassword,
       avatarURL: secureUrl,
       token,

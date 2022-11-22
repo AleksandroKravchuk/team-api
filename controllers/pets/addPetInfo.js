@@ -5,20 +5,23 @@ const { configImg, RequestError } = require("../../helpers");
 const avatarsDir = path.join("public", "pets");
 
 const addPetInfo = async (req, res) => {
-  const { comments } = req.body;
   const { email: owner } = req.user;
+  const { name, breed, birth, comments } = req.body;
   if (!req.file) {
     throw RequestError(400, "file required");
   }
-  if (!comments) {
-    throw RequestError(400, "comments required");
-  }
+  // if (!comments) {
+  //   throw RequestError(400, "comments required");
+  // }
   try {
-    const { id } = req.params;
-    const { body } = req;
+    // const { id } = req.params;
+
     const { path: tempUpload, originalname } = req.file;
     const extension = originalname.split(".").pop();
-    const filename = `${id}.${extension}`;
+
+    // const filename = `${owner}.${extension}`;
+    const filename = req.file.originalname;
+    // console.log(filename);
     if (
       extension === "jpeg" ||
       extension === "png" ||
@@ -33,20 +36,22 @@ const addPetInfo = async (req, res) => {
         filename,
         avatarsDir,
         quality: 60,
-        width: 288,
+        width: 328,
         height: 328,
       };
       configImg(parameterAvatar);
+      // console.log(tempUpload);
       await fs.unlink(tempUpload);
       const photoPet = path.join("pets", filename);
-      const result = await Pets.findByIdAndUpdate(
-        id,
-        { ...body, photoPet, owner },
+
+      const result = await Pets.create(
+        { name, breed, birth, comments, photoPet, owner },
         { new: true }
       );
-      if (!result) {
-        throw RequestError(404, `Not found contact id: ${id}`);
-      }
+
+      // if (!result) {
+      //   throw RequestError(404, `Not found contact id: ${id}`);
+      // }
       res.json({
         status: "success",
         message: "Pet success added",
@@ -57,6 +62,7 @@ const addPetInfo = async (req, res) => {
       throw RequestError(400, "Error format file");
     }
   } catch (error) {
+    console.log(req.file.path);
     await fs.unlink(req.file.path);
     throw error;
   }
