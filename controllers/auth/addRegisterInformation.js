@@ -6,8 +6,6 @@ const { User } = require("../../models");
 const { RequestError } = require("../../helpers");
 
 const addRegisterInformation = async (req, res) => {
-  console.log(req.body);
-  console.log(req.params);
   const { id } = req.params;
   const { name, city, phone } = req.body;
 

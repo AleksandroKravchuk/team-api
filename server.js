@@ -26,6 +26,5 @@ connection
     console.log(
       `Server not running. Error message: ${err.message}`.bold.red.italic
     );
-
     process.exit(1);
   });

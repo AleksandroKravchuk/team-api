@@ -3,7 +3,7 @@ const { Notices } = require("../../models/schemasNotices");
 
 const addNotices = async (req, res) => {
   const { body } = req;
-  const { email: owner } = req.user;
+  const { _id: owner } = req.user;
   const results = await Notices.create({
     ...body,
     owner,
