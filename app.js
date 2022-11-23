@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(express.urlencoded({ extended: false }));
 app.use("/friends", express.static("public/IMG"));
 app.use("/notices", express.static("public/notices"));
-app.use("/", express.static("public/pets"));
+app.use("/pets", express.static("public/pets"));
 app.use("/avatars", express.static("public/avatars"));
 app.use("/", authRouter);
 app.use("/pets", petsRouter);
