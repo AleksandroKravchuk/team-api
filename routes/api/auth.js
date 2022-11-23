@@ -3,23 +3,23 @@ const router = express.Router();
 const { ctrlWrapper } = require("../../helpers");
 const { schemasAuth } = require("../../models/schemasAuth");
 const { auth: ctrl, files: ctrlFs } = require("../../controllers");
-const { authenticate, upload } = require("../../middleware");
+const { authenticate, isValidId, upload } = require("../../middleware");
 
-// router.post(
-//   "/register",
-//   schemasAuth.loginValidation,
-//   ctrlWrapper(ctrl.registerUser)
-// );
+router.post(
+  "/register",
+  schemasAuth.loginValidation,
+  ctrlWrapper(ctrl.registerUser)
+);
 router.post("/login", schemasAuth.loginValidation, ctrlWrapper(ctrl.loginUser));
 router.get("/logout", authenticate, ctrlWrapper(ctrl.logoutUser));
 router.get("/current", authenticate, ctrlWrapper(ctrl.getCurrentUser));
 
-// router.patch(
-//   "/register/:id",
-//   isValidId,
-//   schemasAuth.addInfoValidation,
-//   ctrlWrapper(ctrl.addRegisterInformation)
-// );
+router.patch(
+  "/register/:id",
+  isValidId,
+  schemasAuth.addInfoValidation,
+  ctrlWrapper(ctrl.addRegisterInformation)
+);
 
 router.patch(
   "/avatars",
@@ -27,14 +27,14 @@ router.patch(
   upload.single("avatar"),
   ctrlWrapper(ctrlFs.updateAvatar)
 );
-router.post(
-  "/register",
-  schemasAuth.userREgister,
-  ctrlWrapper(ctrl.authRegister)
-);
-router.post(
-  "/auth/check",
-  schemasAuth.loginValidation,
-  ctrlWrapper(ctrl.authCheck)
-);
+// router.post(
+//   "/register",
+//   schemasAuth.loginValidation,
+//   ctrlWrapper(ctrl.authRegister)
+// );
+// router.post(
+//   "/auth/check",
+//   schemasAuth.loginValidation,
+//   ctrlWrapper(ctrl.authCheck)
+// );
 module.exports = router;

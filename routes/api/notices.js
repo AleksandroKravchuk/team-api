@@ -19,8 +19,11 @@ router.get(
 router.post(
   "/",
   authenticate,
+  upload.single("photoNotices"),
+  schemasNotice.noticeAddValidation,
+  ctrlWrapper(ctrl.createNotice)
   // schemasNotice.noticeValidation,
-  ctrlWrapper(ctrl.addNotices)
+  // ctrlWrapper(ctrl.addNotices)
 );
 
 router.delete(
@@ -45,13 +48,13 @@ router.patch(
   // upload.single("photoNotices"),
   ctrlWrapper(ctrl.deleteNoticeFavorite)
 );
-router.patch(
-  "/:id",
-  authenticate,
-  isValidId,
-  upload.single("photoNotices"),
-  schemasNotice.noticeAddValidation,
-  ctrlWrapper(ctrl.createNotice)
-);
+// router.patch(
+//   "/:id",
+//   authenticate,
+//   isValidId,
+//   upload.single("photoNotices"),
+//   schemasNotice.noticeAddValidation,
+//   ctrlWrapper(ctrl.createNotice)
+// );
 
 module.exports = router;

@@ -33,6 +33,10 @@ const userSchema = new Schema(
       type: String,
       // required: true,
     },
+    isId: {
+      type: String,
+      // required: true,
+    },
     token: String,
     // notices: [{ type: Schema.Types.ObjectId, ref: "Notices" }],
   },
@@ -107,6 +111,7 @@ const schemasAuth = {
       name: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{2,30}")).required(),
       city: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,50}")).required(),
       phone: Joi.string().regex(new RegExp("^[0-9]{12}$")).required(),
+      isId: Joi.string(),
     });
     const validateLogin = schema.validate(req.body);
     if (validateLogin.error) {

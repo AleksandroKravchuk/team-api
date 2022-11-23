@@ -6,7 +6,7 @@ const deletePet = async (req, res) => {
 
   const result = await Pets.findByIdAndRemove({ _id: id });
   if (!result) {
-    throw RequestError(404, `Not found contact id: ${id}`);
+    throw RequestError(404, `Not found pet id: ${id}`);
   }
   res.json({
     status: "success",

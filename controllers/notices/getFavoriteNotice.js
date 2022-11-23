@@ -2,11 +2,11 @@ const { Notices } = require("../../models/schemasNotices");
 const { RequestError } = require("../../helpers");
 
 const getFavoriteNotices = async (req, res) => {
-  const { email } = req.user;
+  const { _id } = req.user;
   const { page = 1, limit = 8 } = req.query;
   const skip = (page - 1) * limit;
 
-  const results = await Notices.find({ favorite: { $in: [email] } }, "", {
+  const results = await Notices.find({ favorite: { $in: [_id] } }, "", {
     skip,
     limit,
   });

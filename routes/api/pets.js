@@ -15,12 +15,12 @@ router.post(
   ctrlWrapper(ctrl.addPetInfo)
 );
 
-// router.delete(
-//   "/delete/:id",
-//   authenticate,
-//   isValidId,
-//   ctrlWrapper(ctrl.deletePet)
-// );
+router.delete(
+  "/delete/:id",
+  authenticate,
+  isValidId,
+  ctrlWrapper(ctrl.deletePet)
+);
 
 // router.put(
 //   "/:contactId",

@@ -5,7 +5,7 @@ const { configImg, RequestError } = require("../../helpers");
 const avatarsDir = path.join("public", "pets");
 
 const addPetInfo = async (req, res) => {
-  const { email: owner } = req.user;
+  const { _id: owner } = req.user;
   const { name, breed, birth, comments } = req.body;
   if (!req.file) {
     throw RequestError(400, "file required");
@@ -19,8 +19,8 @@ const addPetInfo = async (req, res) => {
     const { path: tempUpload, originalname } = req.file;
     const extension = originalname.split(".").pop();
 
-    // const filename = `${owner}.${extension}`;
-    const filename = req.file.originalname;
+    const filename = `${owner}.${extension}`;
+    // const filename = req.file.originalname;
     // console.log(filename);
     if (
       extension === "jpeg" ||
@@ -40,29 +40,23 @@ const addPetInfo = async (req, res) => {
         height: 328,
       };
       configImg(parameterAvatar);
-      // console.log(tempUpload);
-      await fs.unlink(tempUpload);
       const photoPet = path.join("pets", filename);
 
       const result = await Pets.create(
         { name, breed, birth, comments, photoPet, owner },
         { new: true }
       );
-
-      // if (!result) {
-      //   throw RequestError(404, `Not found contact id: ${id}`);
-      // }
       res.json({
         status: "success",
         message: "Pet success added",
         code: 200,
         data: { pet: result },
       });
+      await fs.unlink(tempUpload);
     } else {
       throw RequestError(400, "Error format file");
     }
   } catch (error) {
-    console.log(req.file.path);
     await fs.unlink(req.file.path);
     throw error;
   }

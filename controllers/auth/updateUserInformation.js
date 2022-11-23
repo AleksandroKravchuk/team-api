@@ -2,15 +2,15 @@ const { User } = require("../../models");
 const { RequestError } = require("../../helpers");
 
 const updateUserInformation = async (req, res) => {
-  const { email } = req.user;
+  const { _id } = req.user;
   const body = req;
-  const updateUserInfo = await User.findOneAndUpdate(
-    { email },
+  const updateUserInfo = await User.findByIdAndUpdate(
+    _id,
     { ...body },
     { new: true }
   );
   if (!updateUserInfo) {
-    throw RequestError(404, `User email:${email} not found.`);
+    throw RequestError(404, `User email:${_id} not found.`);
   }
   res.status(201).json({
     code: 200,

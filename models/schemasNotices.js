@@ -10,22 +10,22 @@ const notices = new Schema(
     category: {
       type: String,
       enum: ["sell", "lost-found", "in good hands"],
-      required: [
-        true,
-        "Category is required one of sell, lost-found, in good hands",
-      ],
+      // required: [
+      //   true,
+      //   "Category is required one of sell, lost-found, in good hands",
+      // ],
     },
     title: {
       type: String,
-      minlength: 2,
-      maxlength: 100,
-      required: [true, "Title is required"],
+      // minlength: 2,
+      // maxlength: 100,
+      // required: [true, "Title is required"],
     },
     name: {
       type: String,
       minlength: 2,
       maxlength: 30,
-      required: [true, "Name is required"],
+      // required: [true, "Name is required"],
     },
     breed: {
       type: String,
@@ -102,6 +102,11 @@ const schemasNotice = {
   },
   noticeAddValidation: (req, res, next) => {
     const schema = Joi.object({
+      title: Joi.string(),
+      name: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,16}")),
+      birth: Joi.date().format("DD.MM.YYYY").raw().less("now"),
+      breed: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,16}")),
+      category: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,40}")),
       sex: Joi.string().pattern(new RegExp("^[a-z]{4,6}$")),
       location: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,30}")),
       price: Joi.string().pattern(new RegExp("^[0-9]{1,4}$")),

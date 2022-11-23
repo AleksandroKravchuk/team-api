@@ -2,15 +2,15 @@ const { Notices } = require("../../models/schemasNotices");
 const { RequestError } = require("../../helpers");
 
 const deleteNoticeFavorite = async (req, res) => {
-  const { email} = req.user;
+  const { _id } = req.user;
   const { noticeId } = req.params;
 
-  const update = { $pull: { favorite: email } };
+  const update = { $pull: { favorite: _id } };
   const result = await Notices.findByIdAndUpdate(noticeId, update, {
     new: true,
   });
   if (!result) {
-    throw RequestError(404, `Notice email:${email} not found.`);
+    throw RequestError(404, `Notice owner:${_id} not found.`);
   }
   res.status(200).json({
     code: 200,

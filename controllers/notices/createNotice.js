@@ -5,9 +5,19 @@ const { configImg, RequestError } = require("../../helpers");
 const avatarsDir = path.join("public", "notices");
 
 const createNotice = async (req, res) => {
-  const { email } = req.user;
-  // console.log(req.body);
-  const { sex, location, price, comments } = req.body;
+  const { _id: owner } = req.user;
+  // console.log(req.user._id);
+  const {
+    category,
+    title,
+    name,
+    birth,
+    breed,
+    sex,
+    location,
+    price,
+    comments,
+  } = req.body;
   // const update = { $push: { favorite: [id] } };
 
   if (!req.file) {
@@ -23,7 +33,7 @@ const createNotice = async (req, res) => {
   try {
     const { path: tempUpload, originalname } = req.file;
     const extension = originalname.split(".").pop();
-    const filename = `${email}.${extension}`;
+    const filename = `${owner}.${extension}`;
     if (
       extension === "jpeg" ||
       extension === "png" ||
@@ -42,17 +52,29 @@ const createNotice = async (req, res) => {
         height: 288,
       };
       configImg(parameterPhoto);
-      await fs.unlink(tempUpload);
+
       const photo = path.join("notices", filename);
 
-      const result = await Notices.findByIdAndUpdate(
-        id,
-        { sex, location, price, comments, photo },
+      const result = await Notices.create(
+        {
+          category,
+          title,
+          name,
+          birth,
+          breed,
+          sex,
+          location,
+          price,
+          comments,
+          photo,
+          owner,
+        },
         { new: true }
       );
-      if (!result) {
-        throw RequestError(404, `Not found contact id: ${id}`);
-      }
+      await fs.unlink(tempUpload);
+      // if (!result) {
+      //   throw RequestError(404, `Not found contact id: ${_id}`);
+      // }
       res.json({
         status: "success",
         message: "Notice success added",
