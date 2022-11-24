@@ -33,7 +33,7 @@ const createNotice = async (req, res) => {
   try {
     const { path: tempUpload, originalname } = req.file;
     const extension = originalname.split(".").pop();
-    const filename = `${owner}.${extension}`;
+    const filename = `${originalname}.${extension}`;
     if (
       extension === "jpeg" ||
       extension === "png" ||

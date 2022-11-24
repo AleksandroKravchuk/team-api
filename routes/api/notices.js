@@ -7,7 +7,7 @@ const { authenticate, isValidId, upload } = require("../../middleware");
 
 router.get("/:value", ctrlWrapper(ctrl.getAllNotices));
 router.get("/one/:id", ctrlWrapper(ctrl.getNoticeById));
-
+router.get("/search/:value", ctrlWrapper(ctrl.getNoticeBySearch));
 router.get("/find/owner", authenticate, ctrlWrapper(ctrl.getNoticesOwn));
 router.get(
   "/find/favorite",
@@ -48,6 +48,7 @@ router.patch(
   // upload.single("photoNotices"),
   ctrlWrapper(ctrl.deleteNoticeFavorite)
 );
+
 // router.patch(
 //   "/:id",
 //   authenticate,
