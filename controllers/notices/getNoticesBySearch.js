@@ -13,13 +13,12 @@ const getNoticeBySearch = async (req, res) => {
       const titleArray = item.title.split(" ");
       for (let i = 0; i < titleArray.length; i += 1) {
         const titleWord = titleArray[i].toLowerCase();
-        // console.log(titleWord);
-        // console.log(value.toLowerCase());
-        if (titleWord.includes(value.toLowerCase())) {
-          console.log(item);
+        console.log(titleWord);
+
+        if (titleWord.trim().includes(value.toLowerCase())) {
           const res = searchResult.push(item);
-          console.log(res);
-          // return res;
+
+          return res;
         }
       }
     });
