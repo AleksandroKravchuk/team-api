@@ -12,6 +12,7 @@ const getNewsBySearch = async (req, res) => {
       const titleArray = item.title.split(" ");
       for (let i = 0; i < titleArray.length; i += 1) {
         const titleWord = titleArray[i].toLowerCase();
+        console.log(titleWord);
         if (titleWord.includes(value.toLowerCase())) {
           const res = searchResult.push(item);
           return res;
