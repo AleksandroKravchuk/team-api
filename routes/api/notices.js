@@ -3,7 +3,12 @@ const { schemasNotice } = require("../../models/schemasNotices");
 const { ctrlWrapper } = require("../../helpers");
 const router = express.Router();
 const { notices: ctrl } = require("../../controllers");
-const { authenticate, isValidId, upload } = require("../../middleware");
+const {
+  authenticate,
+  isValidId,
+  upload,
+  uploader,
+} = require("../../middleware");
 
 router.get("/:value", ctrlWrapper(ctrl.getAllNotices));
 router.get("/one/:id", ctrlWrapper(ctrl.getNoticeById));
@@ -48,7 +53,12 @@ router.patch(
   // upload.single("photoNotices"),
   ctrlWrapper(ctrl.deleteNoticeFavorite)
 );
-
+router.post(
+  "/upload-images",
+  authenticate,
+  uploader.array("image"),
+  ctrlWrapper(ctrl.addPhoto)
+);
 // router.patch(
 //   "/:id",
 //   authenticate,
