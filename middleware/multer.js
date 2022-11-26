@@ -6,7 +6,6 @@ const storage = multer.diskStorage({
   destination: tempDir,
   filename: function (req, file, cb) {
     cb(null, new Date().toISOString() + "-" + file.originalname);
-    // console.log(file);
   },
 });
 
@@ -26,5 +25,4 @@ const uploader = multer({
   limits: { fieldSize: 1024 * 1024 },
   fileFilter: fileFilter,
 });
-console.log(uploader);
 module.exports = uploader;

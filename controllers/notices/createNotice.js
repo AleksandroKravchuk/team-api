@@ -3,6 +3,7 @@ const path = require("path");
 const { Notices } = require("../../models/schemasNotices");
 const { configImg, RequestError } = require("../../helpers");
 const avatarsDir = path.join("public", "notices");
+const { uploads } = require("../../helpers/cloudinary");
 
 const createNotice = async (req, res) => {
   const { _id: owner } = req.user;
@@ -51,10 +52,12 @@ const createNotice = async (req, res) => {
         width: 288,
         height: 288,
       };
-      configImg(parameterPhoto);
-      const photo = 
+      // configImg(parameterPhoto);
+      // const photo = await uploads(filename, {
+      //   folder: "Notices",
+      // });
 
-      // const photo = path.join("notices", filename);
+      const photo = path.join("notices", filename);
 
       const result = await Notices.create(
         {
@@ -67,7 +70,7 @@ const createNotice = async (req, res) => {
           location,
           price,
           comments,
-          photo,
+          photo: photo.url,
           owner,
         },
         { new: true }
