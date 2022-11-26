@@ -108,9 +108,9 @@ const schemasAuth = {
   },
   addInfoValidation: (req, res, next) => {
     const schema = Joi.object({
-      name: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{2,30}")).required(),
-      city: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,50}")).required(),
-      phone: Joi.string().regex(new RegExp("^[+0-9]{13}$")).required(),
+      name: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{2,30}")),
+      city: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,50}")),
+      phone: Joi.string().regex(new RegExp("^[+0-9]{13}$")),
       isId: Joi.string(),
     });
     const validateLogin = schema.validate(req.body);
