@@ -53,12 +53,12 @@ router.patch(
   // upload.single("photoNotices"),
   ctrlWrapper(ctrl.deleteNoticeFavorite)
 );
-// router.post(
-//   "/upload-images",
-//   authenticate,
-//   uploader.array("image"),
-//   ctrlWrapper(ctrl.addPhoto)
-// );
+router.post(
+  "/upload-images",
+  authenticate,
+  uploader.array("image"),
+  ctrlWrapper(ctrl.addPhoto)
+);
 // router.patch(
 //   "/:id",
 //   authenticate,

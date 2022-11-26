@@ -52,8 +52,9 @@ const createNotice = async (req, res) => {
         height: 288,
       };
       configImg(parameterPhoto);
+      const photo = 
 
-      const photo = path.join("notices", filename);
+      // const photo = path.join("notices", filename);
 
       const result = await Notices.create(
         {

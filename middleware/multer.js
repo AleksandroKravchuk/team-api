@@ -1,11 +1,12 @@
 const multer = require("multer");
+const path = require("path");
+const tempDir = path.join(__dirname, "../", "tmp");
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./uploads");
-  },
+  destination: tempDir,
   filename: function (req, file, cb) {
     cb(null, new Date().toISOString() + "-" + file.originalname);
+    // console.log(file);
   },
 });
 
@@ -25,5 +26,5 @@ const uploader = multer({
   limits: { fieldSize: 1024 * 1024 },
   fileFilter: fileFilter,
 });
-
+console.log(uploader);
 module.exports = uploader;
