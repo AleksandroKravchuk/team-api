@@ -52,7 +52,7 @@ const createNotice = async (req, res) => {
         width: 288,
         height: 288,
       };
-      // configImg(parameterPhoto);
+      configImg(parameterPhoto);
       // const photo = await uploads(filename, {
       //   folder: "Notices",
       // });
@@ -70,7 +70,7 @@ const createNotice = async (req, res) => {
           location,
           price,
           comments,
-          photo: photo.url,
+          photo,
           owner,
         },
         { new: true }
