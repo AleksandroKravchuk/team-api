@@ -58,7 +58,7 @@ const createNotice = async (req, res) => {
 
   // const files = req.files;
   // for (const file of files) {
-  const { path } = req.files;
+  const { path } = req.file;
   const upload = await uploads(path, "Notices");
 
   // urls.push(upload.url);
