@@ -27,7 +27,7 @@ const loginUser = async (req, res) => {
           code: 200,
           status: "success",
           message: "User is logged in.",
-          data: user,
+          id: user._id,
           token: { token },
         });
       } catch (error) {
