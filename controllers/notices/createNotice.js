@@ -21,7 +21,7 @@ const createNotice = async (req, res) => {
     comments,
   } = req.body;
   // const update = { $push: { favorite: [id] } };
-  console.log(req.files);
+
   if (!req.file) {
     throw RequestError(400, "file required");
   }
@@ -58,7 +58,7 @@ const createNotice = async (req, res) => {
 
   // const files = req.files;
   // for (const file of files) {
-  const { path } = req.files[0];
+  const { path } = req.files;
   const upload = await uploads(path, "Notices");
 
   // urls.push(upload.url);
