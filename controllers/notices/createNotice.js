@@ -82,7 +82,7 @@ const createNotice = async (req, res) => {
       location,
       price,
       comments,
-      photo: upload.url,
+      // photo: upload.url,
       owner,
     },
     { new: true }
