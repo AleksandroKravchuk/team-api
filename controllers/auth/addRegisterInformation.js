@@ -29,6 +29,7 @@ const addRegisterInformation = async (req, res) => {
       user: {
         name: addInfoRegister.name,
         email: addInfoRegister.email,
+        id: addInfoRegister._id,
         phone: addInfoRegister.phone,
         city: addInfoRegister.city,
         avatarURL: secureUrl,
