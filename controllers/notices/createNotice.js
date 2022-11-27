@@ -20,6 +20,7 @@ const createNotice = async (req, res) => {
     price,
     comments,
   } = req.body;
+
   // const update = { $push: { favorite: [id] } };
 
   if (!req.file) {
