@@ -22,7 +22,7 @@ const createNotice = async (req, res) => {
   } = req.body;
   // const update = { $push: { favorite: [id] } };
   console.log(req.files);
-  if (!req.files) {
+  if (!req.file) {
     throw RequestError(400, "file required");
   }
   // if (!comments || !sex || !location || !price) {
