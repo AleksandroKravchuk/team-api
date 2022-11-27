@@ -25,7 +25,7 @@ router.post(
   "/",
   authenticate,
 
-  upload.single("image"),
+  uploader.single("image"),
   // upload.single("photoNotices"),
   schemasNotice.noticeAddValidation,
   ctrlWrapper(ctrl.createNotice)
