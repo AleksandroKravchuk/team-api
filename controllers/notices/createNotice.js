@@ -58,10 +58,10 @@ const createNotice = async (req, res) => {
 
   // const files = req.files;
   // for (const file of files) {
-  const { path } = req.file;
+  // const { path } = req.file;
   // const upload = await uploads(path, "Notices");
 
-  // // urls.push(upload.url);
+  // urls.push(upload.url);
   // fs.unlinkSync(path);
   // }
   // console.log(upload);
