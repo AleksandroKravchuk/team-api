@@ -64,7 +64,7 @@ const createNotice = async (req, res) => {
   // urls.push(upload.url);
   fs.unlinkSync(path);
   // }
-  console.log(upload);
+  // console.log(upload);
   // const photo = await uploads(filename, {
   //   folder: "Notices",
   // });
