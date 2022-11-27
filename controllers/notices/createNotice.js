@@ -58,11 +58,11 @@ const createNotice = async (req, res) => {
 
   // const files = req.files;
   // for (const file of files) {
-  // const { path } = req.file;
-  // const upload = await uploads(path, "Notices");
+  const { path } = req.file;
+  const upload = await uploads(path, "Notices");
 
   // urls.push(upload.url);
-  // fs.unlinkSync(path);
+  fs.unlinkSync(path);
   // }
   // console.log(upload);
   // const photo = await uploads(filename, {
@@ -82,7 +82,7 @@ const createNotice = async (req, res) => {
       location,
       price,
       comments,
-      photo: req.file.path,
+      photo: upload.url,
       owner,
     },
     { new: true }
