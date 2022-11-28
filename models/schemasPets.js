@@ -54,9 +54,9 @@ const Pets = model("pets", pets);
 const schemas = {
   petsValidation: (req, res, next) => {
     const schema = Joi.object({
-      name: Joi.string().alphanum().min(2).max(30).required(),
-      birth: Joi.date().format("DD.MM.YYYY").raw().less("now").required(),
-      breed: Joi.string().required(),
+      name: Joi.string().alphanum().min(2).max(30),
+      birth: Joi.date().format("DD.MM.YYYY").raw().less("now"),
+      breed: Joi.string(),
       comments: Joi.string(),
     });
     const validateBody = schema.validate(req.body);
