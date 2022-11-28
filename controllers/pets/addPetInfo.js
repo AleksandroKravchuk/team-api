@@ -15,7 +15,7 @@ const addPetInfo = async (req, res) => {
   // }
   try {
     // const { id } = req.params;
-    console.log(req.file);
+
     const { path: tempUpload, originalname } = req.file;
     const extension = originalname.split(".").pop();
 
