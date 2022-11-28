@@ -6,10 +6,10 @@ const avatarsDir = path.join("public", "pets");
 
 const addPetInfo = async (req, res) => {
   const { _id: owner } = req.user;
-  const { name, breed, birth, comments } = req.body;
-  // if (!req.file) {
-  //   throw RequestError(400, "file required");
-  // }
+  const { name, birth, breed, comments } = req.body;
+  if (!req.file) {
+    throw RequestError(400, "file required");
+  }
   // if (!comments) {
   //   throw RequestError(400, "comments required");
   // }
