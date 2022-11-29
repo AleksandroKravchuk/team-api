@@ -14,23 +14,15 @@ router.get("/:value", ctrlWrapper(ctrl.getAllNotices));
 router.get("/one/:id", ctrlWrapper(ctrl.getNoticeById));
 router.get("/search/:value", ctrlWrapper(ctrl.getNoticeBySearch));
 router.get("/find/owner", authenticate, ctrlWrapper(ctrl.getNoticesOwn));
-router.get(
-  "/find/favorite",
-  // schemasNotice.noticeFavorite,
-  authenticate,
-  ctrlWrapper(ctrl.getFavoriteNotice)
-);
+router.get("/find/favorite", authenticate, ctrlWrapper(ctrl.getFavoriteNotice));
 
 router.post(
   "/",
   authenticate,
-
   // uploader.single("image"),
   upload.single("photoNotices"),
   schemasNotice.noticeAddValidation,
   ctrlWrapper(ctrl.createNotice)
-  // schemasNotice.noticeValidation,
-  // ctrlWrapper(ctrl.addNotices)
 );
 
 router.delete(
@@ -42,17 +34,11 @@ router.delete(
 router.patch(
   "/addfavorite/:noticeId",
   authenticate,
-  // isValidId,
-  // schemasNotice.noticeAddValidation,
-  // upload.single("photoNotices"),
   ctrlWrapper(ctrl.addNoticeFavorite)
 );
 router.patch(
   "/deletefavorite/:noticeId",
   authenticate,
-  // isValidId,
-  // schemasNotice.noticeAddValidation,
-  // upload.single("photoNotices"),
   ctrlWrapper(ctrl.deleteNoticeFavorite)
 );
 router.post(
@@ -61,13 +47,5 @@ router.post(
   uploader.array("image"),
   ctrlWrapper(ctrl.addPhoto)
 );
-// router.patch(
-//   "/:id",
-//   authenticate,
-//   isValidId,
-//   upload.single("photoNotices"),
-//   schemasNotice.noticeAddValidation,
-//   ctrlWrapper(ctrl.createNotice)
-// );
 
 module.exports = router;
