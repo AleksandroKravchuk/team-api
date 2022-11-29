@@ -64,7 +64,7 @@ const schemasAuth = {
     }
     next();
   },
-  userREgister: (req, res, next) => {
+  userRegister: (req, res, next) => {
     const schema = Joi.object({
       name: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{2,30}")),
       email: Joi.string().email({
@@ -74,7 +74,7 @@ const schemasAuth = {
       password: Joi.string()
         .pattern(new RegExp("^[a-zA-Z0-9]{7,32}$"))
         .required(),
-      phone: Joi.string().regex(new RegExp("^[+0-9]{13}$")),
+      phone: Joi.string().regex(new RegExp("^[0-9]{12}$")),
       city: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,50}")),
     });
     const validateUser = schema.validate(req.body);
@@ -88,9 +88,6 @@ const schemasAuth = {
       password: Joi.string()
         .pattern(new RegExp("^[a-zA-Z0-9]{7,32}$"))
         .required(),
-      // .description(
-      //   "password must include numbers or uppercase or lowercase letters without spaces between 7 and 32 characters"
-      // ),
       email: Joi.string()
         .email({
           minDomainSegments: 2,
@@ -106,29 +103,6 @@ const schemasAuth = {
     }
     next();
   },
-  addInfoValidation: (req, res, next) => {
-    const schema = Joi.object({
-      name: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{2,30}")),
-      city: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,50}")),
-      phone: Joi.string().regex(new RegExp("^[+0-9]{13}$")),
-      isId: Joi.string(),
-    });
-    const validateLogin = schema.validate(req.body);
-    if (validateLogin.error) {
-      return res.status(400).json({ message: `${validateLogin.error}` });
-    }
-    next();
-  },
-  // verifyEmailSchema: (req, res, next) => {
-  //   const schema = Joi.object({
-  //     email: Joi.string().required(),
-  //   });
-  //   const verifyEmail = schema.validate(req.body);
-  //   if (verifyEmail.error) {
-  //     return res.status(400).json({ message: "missing required field email" });
-  //   }
-  //   next();
-  // },
 };
 
 module.exports = { User, schemasAuth };

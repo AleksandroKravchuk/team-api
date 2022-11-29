@@ -22,21 +22,4 @@ router.delete(
   ctrlWrapper(ctrl.deletePet)
 );
 
-// router.put(
-//   "/:contactId",
-//   authenticate,
-//   isValidId,
-//   // schemas.bodyValidation,
-//   ctrlWrapper(ctrl.updateContact)
-// );
-
-// router.patch(
-//   "/:id",
-//   authenticate,
-//   isValidId,
-//   upload.single("photoPet"),
-//   // schemas.addPetsValidation,
-//   ctrlWrapper(ctrl.addPetInfo)
-// );
-
 module.exports = router;

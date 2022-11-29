@@ -1,5 +1,4 @@
 const getAllNotices = require("./getAllNotices");
-const addNotices = require("./addNotices");
 const createNotice = require("./createNotice");
 const getNoticesOwn = require("./getNoticesOwner");
 const getNoticeById = require("./getNoticeById");
@@ -12,7 +11,6 @@ const addPhoto = require("./addPhoto");
 
 module.exports = {
   getAllNotices,
-  addNotices,
   createNotice,
   getNoticesOwn,
   getNoticeById,
