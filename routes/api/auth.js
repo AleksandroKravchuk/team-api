@@ -7,7 +7,7 @@ const { authenticate, isValidId, upload } = require("../../middleware");
 
 router.post(
   "/register",
-  schemasAuth.loginValidation,
+  schemasAuth.userREgister,
   ctrlWrapper(ctrl.registerUser)
 );
 router.post("/login", schemasAuth.loginValidation, ctrlWrapper(ctrl.loginUser));
