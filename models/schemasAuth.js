@@ -74,7 +74,7 @@ const schemasAuth = {
       password: Joi.string()
         .pattern(new RegExp("^[a-zA-Z0-9]{7,32}$"))
         .required(),
-      phone: Joi.string().regex(new RegExp("^[0-9]{12}$")),
+      phone: Joi.string().regex(new RegExp("^[+0-9]{13}$")),
       city: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,50}")),
     });
     const validateUser = schema.validate(req.body);

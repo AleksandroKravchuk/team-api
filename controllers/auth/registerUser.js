@@ -22,12 +22,12 @@ const registerUser = async (req, res) => {
       phone,
       token: "",
     });
-    const em = newUser.email;
+    // const em = newUser.email;
     const payload = {
       id: newUser._id,
     };
     const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "10h" });
-    const userCreate = await User.findOneAndUpdate({ em }, { token });
+    const userCreate = await User.findOneAndUpdate({ email }, { token });
     res.status(200).json({
       code: 200,
       status: "success",
@@ -35,8 +35,8 @@ const registerUser = async (req, res) => {
       data: {
         name: userCreate.name,
         city: userCreate.city,
-        phone: userCreate.city,
-        token: userCreate.token,
+        phone: userCreate.phone,
+        token,
         id: userCreate._id,
         email: userCreate.email,
       },
