@@ -1,8 +1,8 @@
 const fs = require("fs/promises");
-const path = require("path");
+// const path = require("path");
 const { Notices } = require("../../models/schemasNotices");
-const { configImg, RequestError } = require("../../helpers");
-const avatarsDir = path.join("public", "notices");
+// const { configImg, RequestError } = require("../../helpers");
+// const avatarsDir = path.join("public", "notices");
 const { uploads } = require("../../helpers/cloudinary");
 
 const createNoticeCloud = async (req, res) => {
