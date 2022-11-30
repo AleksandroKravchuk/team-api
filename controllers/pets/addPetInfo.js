@@ -10,18 +10,11 @@ const addPetInfo = async (req, res) => {
   if (!req.file) {
     throw RequestError(400, "file required");
   }
-  // if (!comments) {
-  //   throw RequestError(400, "comments required");
-  // }
   try {
-    // const { id } = req.params;
-
     const { path: tempUpload, originalname } = req.file;
     const extension = originalname.split(".").pop();
 
     const filename = `${originalname}`;
-    // const filename = req.file.originalname;
-    // console.log(filename);
     if (
       extension === "jpeg" ||
       extension === "png" ||

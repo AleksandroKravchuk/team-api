@@ -8,7 +8,6 @@ const { uploads } = require("../../helpers/cloudinary");
 
 const createNotice = async (req, res) => {
   const { _id: owner } = req.user;
-  console.log(req.file);
   const {
     category,
     title,
@@ -21,18 +20,9 @@ const createNotice = async (req, res) => {
     comments,
   } = req.body;
 
-  // const update = { $push: { favorite: [id] } };
-
   if (!req.file) {
     throw RequestError(400, "file required");
   }
-  // if (!comments || !sex || !location || !price) {
-  //   throw RequestError(400, "All fields are required");
-  // }
-
-  // if (sex !== "male" || sex !== "female") {
-  //   throw RequestError(400, "sex should be male or female");
-  // }
   try {
     const { path: tempUpload, originalname } = req.file;
     const extension = originalname.split(".").pop();
@@ -56,16 +46,6 @@ const createNotice = async (req, res) => {
         height: 288,
       };
       configImg(parameterPhoto);
-      // const urls = [];
-
-      // const files = req.files;
-      // for (const file of files) {
-      // const { path } = req.file;
-      // const upload = await uploads(path, "Notices");
-
-      // urls.push(upload.url);
-      // fs.unlinkSync(path);
-
       const photo = path.join("notices", filename);
 
       const result = await Notices.create(
@@ -80,7 +60,6 @@ const createNotice = async (req, res) => {
           price,
           comments,
           photo,
-          // photo: upload.url,
           owner,
         },
         { new: true }
