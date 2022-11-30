@@ -19,7 +19,7 @@ router.get("/find/favorite", authenticate, ctrlWrapper(ctrl.getFavoriteNotice));
 router.post(
   "/",
   authenticate,
-  uploader.single("photoPet"),
+  uploader.single("photoNotice"),
   // upload.single("photoNotices"),
   schemasNotice.noticeAddValidation,
   ctrlWrapper(ctrl.createNoticeCloud)
