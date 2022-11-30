@@ -23,29 +23,31 @@ const createNoticeCloud = async (req, res) => {
   if (!req.file) {
     throw RequestError(400, "file required");
   }
-
   try {
     const { path } = req.file;
     const upload = await uploads(path, "Notices");
     fs.unlinkSync(path);
-
-    const result = await Notices.create(
-      {
-        category,
-        title,
-        name,
-        birth,
-        breed,
-        sex,
-        location,
-        price,
-        comments,
-        photo: upload.url,
-        public: upload.public_id,
-        owner,
-      },
-      { new: true }
-    );
+  } catch (error) {
+    console.log(error);
+  }
+  try {
+    // const result = await Notices.create(
+    //   {
+    //     category,
+    //     title,
+    //     name,
+    //     birth,
+    //     breed,
+    //     sex,
+    //     location,
+    //     price,
+    //     comments,
+    //     photo: upload.url,
+    //     public: upload.public_id,
+    //     owner,
+    //   },
+    //   { new: true }
+    // );
     res.json({
       status: "success",
       message: "Notice success added",
