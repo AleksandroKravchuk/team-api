@@ -3,7 +3,7 @@ const { RequestError } = require("../../helpers");
 
 const getNoticeBySearch = async (req, res) => {
   const { value } = req.params;
-  const result = await Notices.find();
+  const result = await Notices.find().populate("owner", ["email", "phone"]);
   const searchResult = [];
   if (!result || result.length === 0) {
     throw RequestError(404, "Not found notices");
