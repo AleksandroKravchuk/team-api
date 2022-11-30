@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fs = require("fs/promises");
 const path = require("path");
 const { Notices } = require("../../models/schemasNotices");
 const { configImg, RequestError } = require("../../helpers");
