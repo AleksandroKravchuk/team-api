@@ -13,3 +13,6 @@ exports.uploads = async (file, folder) => {
 
   return upload;
 };
+exports.deleteUploads = async (file) => {
+  await cloudinary.uploader.destroy(file);
+};

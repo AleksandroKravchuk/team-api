@@ -41,6 +41,7 @@ const createNoticeCloud = async (req, res) => {
         price,
         comments,
         photo: upload.url,
+        public: upload.public_id,
         owner,
       },
       { new: true }
