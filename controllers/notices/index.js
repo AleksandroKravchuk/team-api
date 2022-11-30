@@ -8,6 +8,7 @@ const deleteNoticeFavorite = require("./deleteNoticeFavorite");
 const deleteNotice = require("./deleteNotice");
 const getNoticeBySearch = require("./getNoticesBySearch");
 const addPhoto = require("./addPhoto");
+const createNoticeCloud = require("./createNoticeCloud");
 
 module.exports = {
   getAllNotices,
@@ -20,4 +21,5 @@ module.exports = {
   deleteNotice,
   getNoticeBySearch,
   addPhoto,
+  createNoticeCloud,
 };

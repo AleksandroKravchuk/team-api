@@ -19,10 +19,10 @@ router.get("/find/favorite", authenticate, ctrlWrapper(ctrl.getFavoriteNotice));
 router.post(
   "/",
   authenticate,
-  // uploader.single("image"),
-  upload.single("photoNotices"),
+  uploader.single("photoPet"),
+  // upload.single("photoNotices"),
   schemasNotice.noticeAddValidation,
-  ctrlWrapper(ctrl.createNotice)
+  ctrlWrapper(ctrl.createNoticeCloud)
 );
 
 router.delete(
