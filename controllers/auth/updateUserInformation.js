@@ -3,7 +3,8 @@ const { RequestError } = require("../../helpers");
 
 const updateUserInformation = async (req, res) => {
   const { _id } = req.user;
-  const body = req;
+  const { body } = req;
+
   const updateUserInfo = await User.findByIdAndUpdate(
     _id,
     { ...body },
