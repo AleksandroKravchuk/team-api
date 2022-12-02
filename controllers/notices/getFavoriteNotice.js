@@ -10,7 +10,7 @@ const getFavoriteNotices = async (req, res) => {
     skip,
     limit,
   });
-  if (!results || results.length === 0) {
+  if (!results) {
     throw RequestError(404, `Not found favorite notice `);
   }
   res.status(200).json({
