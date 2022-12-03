@@ -22,7 +22,8 @@ const updateAvatar = async (req, res) => {
       extension === "tiff" ||
       extension === "gif" ||
       extension === "jpg" ||
-      extension === "JPG"
+      extension === "JPG" ||
+      extension === "HEIC"
     ) {
       const parameterAvatar = {
         tempUpload,
