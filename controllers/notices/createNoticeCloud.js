@@ -32,11 +32,12 @@ const createNoticeCloud = async (req, res) => {
   }
   const { path } = req.file;
   const folder = "Notices";
-  const upload = await cloudinary.uploader.upload(path, {
-    folder,
-  });
+
   // const upload = await uploads(path, "Notices");
   try {
+    const upload = await cloudinary.uploader.upload(path, {
+      folder,
+    });
     fs.unlinkSync(path);
 
     const result = await Notices.create(
@@ -56,7 +57,7 @@ const createNoticeCloud = async (req, res) => {
       },
       { new: true }
     );
-    res.json({
+    return res.json({
       status: "success",
       message: "Notice success added",
       code: 200,
