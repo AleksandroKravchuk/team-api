@@ -57,7 +57,7 @@ const createNoticeCloud = async (req, res) => {
       },
       { new: true }
     );
-    return res.json({
+    res.json({
       status: "success",
       message: "Notice success added",
       code: 200,
