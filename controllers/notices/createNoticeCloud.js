@@ -23,11 +23,10 @@ const createNoticeCloud = async (req, res) => {
   if (!req.file) {
     throw RequestError(400, "file required");
   }
-
+  const { path } = req.file;
+  const upload = await uploads(path, "Notices");
   try {
-    const { path } = req.file;
-    const upload = await uploads(path, "Notices");
-    // fs.unlinkSync(path);
+    fs.unlinkSync(path);
 
     const result = await Notices.create(
       {
@@ -46,7 +45,7 @@ const createNoticeCloud = async (req, res) => {
       },
       { new: true }
     );
-    return res.json({
+    res.json({
       status: "success",
       message: "Notice success added",
       code: 200,
