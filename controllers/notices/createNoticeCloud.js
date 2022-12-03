@@ -2,8 +2,15 @@ const fs = require("fs");
 // const path = require("path");
 const { Notices } = require("../../models/schemasNotices");
 const { RequestError } = require("../../helpers");
-// const avatarsDir = path.join("public", "notices");
-const { uploads } = require("../../helpers/cloudinary");
+const cloudinary = require("cloudinary").v2;
+require("dotenv").config();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_SECRET: process.env.CLOUDINARY_API_SECRET,
+});
+// const { uploads } = require("../../helpers/cloudinary");
 
 const createNoticeCloud = async (req, res) => {
   const { _id: owner } = req.user;
@@ -24,7 +31,11 @@ const createNoticeCloud = async (req, res) => {
     throw RequestError(400, "file required");
   }
   const { path } = req.file;
-  const upload = await uploads(path, "Notices");
+  const folder = "Notices";
+  const upload = await cloudinary.uploader.upload(path, {
+    folder,
+  });
+  // const upload = await uploads(path, "Notices");
   try {
     fs.unlinkSync(path);
 
