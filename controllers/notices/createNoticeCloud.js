@@ -1,4 +1,4 @@
-const fs = require("fs/promises");
+const fs = require("fs");
 // const path = require("path");
 const { Notices } = require("../../models/schemasNotices");
 const { RequestError } = require("../../helpers");
@@ -27,9 +27,6 @@ const createNoticeCloud = async (req, res) => {
   try {
     const { path } = req.file;
     const upload = await uploads(path, "Notices");
-    if (!upload) {
-      return;
-    }
     // fs.unlinkSync(path);
 
     const result = await Notices.create(
@@ -49,13 +46,13 @@ const createNoticeCloud = async (req, res) => {
       },
       { new: true }
     );
-    res.json({
+    return res.json({
       status: "success",
       message: "Notice success added",
       code: 200,
       data: { notice: result },
     });
-    fs.unlinkSync(path);
+    // fs.unlinkSync(path);
   } catch (error) {
     await fs.unlink(req.file.path);
     throw error;
