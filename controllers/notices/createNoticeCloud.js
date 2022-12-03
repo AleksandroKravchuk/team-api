@@ -1,7 +1,7 @@
 const fs = require("fs/promises");
 // const path = require("path");
 const { Notices } = require("../../models/schemasNotices");
-// const { configImg, RequestError } = require("../../helpers");
+const { RequestError } = require("../../helpers");
 // const avatarsDir = path.join("public", "notices");
 const { uploads } = require("../../helpers/cloudinary");
 
@@ -27,7 +27,7 @@ const createNoticeCloud = async (req, res) => {
   try {
     const { path } = req.file;
     const upload = await uploads(path, "Notices");
-    fs.unlinkSync(path);
+    // fs.unlinkSync(path);
 
     const result = await Notices.create(
       {
@@ -52,6 +52,7 @@ const createNoticeCloud = async (req, res) => {
       code: 200,
       data: { notice: result },
     });
+    fs.unlinkSync(path);
   } catch (error) {
     await fs.unlink(req.file.path);
     throw error;
