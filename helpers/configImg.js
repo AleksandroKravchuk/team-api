@@ -14,8 +14,8 @@ function configImg({
       image
         .resize(width, height)
         .write(`${avatarsDir}/${filename}`)
-        .quality(quality)
-        .rotate(90); // save
+        .quality(quality);
+      // save
       // Do stuff with the image.
     })
     .catch(() => {

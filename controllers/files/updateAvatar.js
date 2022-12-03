@@ -14,7 +14,7 @@ const updateAvatar = async (req, res) => {
     const { path: tempUpload, originalname } = req.file;
     const extension = originalname.split(".").pop();
     console.log(extension);
-    const filename = `${_id}.${extension}`;
+    const filename = `${originalname}.${extension}`;
     if (
       extension === "jpeg" ||
       extension === "png" ||
