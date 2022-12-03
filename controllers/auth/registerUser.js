@@ -1,6 +1,7 @@
 // const { nanoid } = require("nanoid");
 require("dotenv").config();
 const bcrypt = require("bcrypt");
+const gravatar = require("gravatar");
 const jwt = require("jsonwebtoken");
 const { User } = require("../../models");
 require("dotenv").config();
@@ -10,6 +11,7 @@ const { RequestError } = require("../../helpers");
 const registerUser = async (req, res) => {
   const { email, password, name, city, phone } = req.body;
   const hashPassword = await bcrypt.hash(password, 10);
+  const secureUrl = gravatar.url(email, { s: "100", r: "x", d: "retro" }, true);
   const user = await User.findOne({ email });
   if (user) {
     throw RequestError(409, "Email in use");
@@ -20,6 +22,7 @@ const registerUser = async (req, res) => {
       name,
       city,
       phone,
+      logo: secureUrl,
       token: "",
     });
     // const em = newUser.email;
@@ -39,6 +42,7 @@ const registerUser = async (req, res) => {
         token,
         id: userCreate._id,
         email: userCreate.email,
+        logo: userCreate.logo,
       },
     });
   }
