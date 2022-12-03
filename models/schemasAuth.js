@@ -55,7 +55,7 @@ const schemasAuth = {
         tlds: { allow: ["com", "net", "ua"] },
       }),
       birthday: Joi.date().format("DD.MM.YYYY").raw().less("now"),
-      phone: Joi.string().regex(new RegExp("^[0-9]{12}$")),
+      phone: Joi.string().regex(new RegExp("^[+0-9]{13}$")),
       city: Joi.string().pattern(new RegExp("^[a-zA-Z]{2,50}")),
     });
     const validateUser = schema.validate(req.body);
