@@ -29,7 +29,7 @@ const userSchema = new Schema(
       type: String,
       default: "00.00.0000",
     },
-    logo: {
+    avatarURL: {
       type: String,
       // required: true,
     },

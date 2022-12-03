@@ -22,7 +22,7 @@ const registerUser = async (req, res) => {
       name,
       city,
       phone,
-      logo: secureUrl,
+      avatarURL: secureUrl,
       token: "",
     });
     // const em = newUser.email;
@@ -42,7 +42,7 @@ const registerUser = async (req, res) => {
         token,
         id: userCreate._id,
         email: userCreate.email,
-        logo: userCreate.logo,
+        avatarURL: userCreate.avatarURL,
       },
     });
   }
