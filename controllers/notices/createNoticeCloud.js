@@ -27,6 +27,9 @@ const createNoticeCloud = async (req, res) => {
   try {
     const { path } = req.file;
     const upload = await uploads(path, "Notices");
+    if (!upload) {
+      return;
+    }
     // fs.unlinkSync(path);
 
     const result = await Notices.create(
