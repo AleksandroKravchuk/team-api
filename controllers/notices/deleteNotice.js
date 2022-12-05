@@ -11,7 +11,7 @@ const deleteNotice = async (req, res) => {
     throw RequestError(404, `Not found notice id: ${id} owner:${owner}`);
   }
 
-  await deleteUploads(result.public);
+  // await deleteUploads(result.public);
   await result.remove();
   res.json({
     status: "success",
