@@ -9,7 +9,7 @@ const getFavoriteNotices = async (req, res) => {
   const results = await Notices.find({ favorite: { $in: [_id] } }, "", {
     skip,
     limit,
-  });
+  }).populate("owner", ["email", "phone"]);
   if (!results) {
     throw RequestError(404, `Not found favorite notice `);
   }
