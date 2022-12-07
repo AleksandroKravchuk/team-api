@@ -60,7 +60,7 @@ const createNotice = async (req, res) => {
           location,
           price,
           comments,
-          photo: `https://blende2.herokuapp.com/${photo}`,
+          photo: `https://out-light.herokuapp.com/${photo}`,
           owner,
         },
         { new: true }
