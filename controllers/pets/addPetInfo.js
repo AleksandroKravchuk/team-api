@@ -47,7 +47,7 @@ const addPetInfo = async (req, res) => {
         },
         { new: true }
       );
-      res.json({
+    return  res.json({
         status: "success",
         message: "Pet success added",
         code: 200,

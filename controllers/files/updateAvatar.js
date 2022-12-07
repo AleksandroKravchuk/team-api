@@ -38,11 +38,11 @@ const updateAvatar = async (req, res) => {
       const avatarURL = path.join("avatars", filename);
 
       await User.findByIdAndUpdate(_id, { avatarURL }, { new: true });
-      res.status(200).json({
+     return res.status(200).json({
         code: 200,
         status: "success",
         message: "avatar added",
-        avatarURL: `https://blende2.herokuapp.com/${avatarURL}`,
+        avatarURL: `https://out-light.herokuapp.com/${avatarURL}`,
       });
     } else {
       throw RequestError(400, "Error format file");
