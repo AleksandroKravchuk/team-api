@@ -19,6 +19,7 @@ const getUserInformation = async (req, res) => {
           phone: result.phone,
           city: result.city,
           logo: `https://out-light.herokuapp.com/${result.avatarURL}`,
+          avatar: result.avatar,
         },
       },
     });

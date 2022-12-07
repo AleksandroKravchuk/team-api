@@ -31,6 +31,10 @@ const userSchema = new Schema(
     },
     avatarURL: {
       type: String,
+      default: null,
+    },
+    avatar: {
+      type: String,
       // required: true,
     },
     isId: {
