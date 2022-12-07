@@ -42,7 +42,7 @@ const updateAvatar = async (req, res) => {
         code: 200,
         status: "success",
         message: "avatar added",
-        avatarURL: `https://out-light.herokuapp.com/${avatarURL}`,
+        avatarURL,
       });
     } else {
       throw RequestError(400, "Error format file");
