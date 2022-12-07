@@ -35,8 +35,8 @@ const updateAvatar = async (req, res) => {
       };
       configImg(parameterAvatar);
       await fs.unlink(tempUpload);
-      const avatarURL = path.join("avatars", filename);
-
+      let avatarURL = path.join("avatars", filename);
+      avatarURL = `https://out-light.herokuapp.com/${avatarURL}`;
       await User.findByIdAndUpdate(_id, { avatarURL }, { new: true });
       return res.status(200).json({
         code: 200,
