@@ -34,7 +34,7 @@ const addPetInfo = async (req, res) => {
       };
       configImg(parameterAvatar);
       const photoPet = path.join("photoPets", filename);
-
+      await fs.unlink(tempUpload);
       const result = await Pets.create(
         {
           name,
@@ -52,7 +52,6 @@ const addPetInfo = async (req, res) => {
         code: 200,
         data: { pet: result },
       });
-      await fs.unlink(tempUpload);
     } else {
       throw RequestError(400, "Error format file");
     }
