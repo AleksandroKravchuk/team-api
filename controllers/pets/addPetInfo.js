@@ -2,7 +2,7 @@ const fs = require("fs/promises");
 const path = require("path");
 const { Pets } = require("../../models/schemasPets");
 const { configImg, RequestError } = require("../../helpers");
-const avatarsDir = path.join("public", "photoPets");
+const avatarsDir = path.join("public", "photoPet");
 const { nanoid } = require("nanoid");
 
 const addPetInfo = async (req, res) => {
@@ -33,7 +33,7 @@ const addPetInfo = async (req, res) => {
         height: 328,
       };
       configImg(parameterAvatar);
-      const photo = path.join("photoPets", filename);
+      const photo = path.join("photoPet", filename);
 
       await fs.unlink(tempUpload);
       const result = await Pets.create(

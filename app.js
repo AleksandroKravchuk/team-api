@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(express.urlencoded({ extended: false }));
 app.use("/friends", express.static("public/IMG"));
 app.use("/photoNotice", express.static("public/photoNotice"));
-app.use("/photoPets", express.static("public/photoPets"));
+app.use("/photoPet", express.static("public/photoPet"));
 app.use("/avatars", express.static("public/avatars"));
 app.use("/", authRouter);
 app.use("/pets", petsRouter);
