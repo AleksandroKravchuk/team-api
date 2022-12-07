@@ -33,7 +33,8 @@ const addPetInfo = async (req, res) => {
         height: 328,
       };
       configImg(parameterAvatar);
-      const photoPet = path.join("photoPets", filename);
+      const photo = path.join("photoPets", filename);
+
       await fs.unlink(tempUpload);
       const result = await Pets.create(
         {
@@ -41,7 +42,7 @@ const addPetInfo = async (req, res) => {
           breed,
           birth,
           comments,
-          photoPet: `https://blende2.herokuapp.com/${photoPet}`,
+          photoPet: `https://blende2.herokuapp.com/${photo}`,
           owner,
         },
         { new: true }
