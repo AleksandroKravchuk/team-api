@@ -36,7 +36,14 @@ const addPetInfo = async (req, res) => {
       const photoPet = path.join("pets", filename);
 
       const result = await Pets.create(
-        { name, breed, birth, comments, photoPet, owner },
+        {
+          name,
+          breed,
+          birth,
+          comments,
+          photoPet: `https://blende2.herokuapp.com/${photoPet}`,
+          owner,
+        },
         { new: true }
       );
       res.json({
