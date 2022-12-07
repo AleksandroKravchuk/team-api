@@ -1,10 +1,11 @@
 // const fs = require("fs/promises");
-const fs = require("fs");
+const fs = require("fs/promises");
 const path = require("path");
 const { Notices } = require("../../models/schemasNotices");
 const { configImg, RequestError } = require("../../helpers");
-const avatarsDir = path.join("public", "notices");
-const { uploads } = require("../../helpers/cloudinary");
+const avatarsDir = path.join("public", "photoNotice");
+// const { uploads } = require("../../helpers/cloudinary");
+const { nanoid } = require("nanoid");
 
 const createNotice = async (req, res) => {
   const { _id: owner } = req.user;
@@ -27,7 +28,7 @@ const createNotice = async (req, res) => {
     const { path: tempUpload, originalname } = req.file;
     const extension = originalname.split(".").pop();
 
-    const filename = `${originalname}`;
+    const filename = `${nanoid()}.${extension}`;
     if (
       extension === "jpeg" ||
       extension === "png" ||
@@ -46,8 +47,8 @@ const createNotice = async (req, res) => {
         height: 288,
       };
       configImg(parameterPhoto);
-      const photo = path.join("notices", filename);
-
+      const photo = path.join("photoNotice", filename);
+      await fs.unlink(tempUpload);
       const result = await Notices.create(
         {
           category,
@@ -59,18 +60,17 @@ const createNotice = async (req, res) => {
           location,
           price,
           comments,
-          photo,
+          photo: `https://blende2.herokuapp.com/${photo}`,
           owner,
         },
         { new: true }
       );
-      res.json({
+      return res.json({
         status: "success",
         message: "Notice success added",
         code: 200,
         data: { notice: result },
       });
-      await fs.unlink(tempUpload);
     } else {
       throw RequestError(400, "Error format file");
     }
