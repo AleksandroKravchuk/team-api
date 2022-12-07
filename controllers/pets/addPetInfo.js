@@ -42,7 +42,7 @@ const addPetInfo = async (req, res) => {
           breed,
           birth,
           comments,
-          photoPet: `https://blende2.herokuapp.com/${photo}`,
+          photoPet: `https://out-light.herokuapp.com/${photo}`,
           owner,
         },
         { new: true }
