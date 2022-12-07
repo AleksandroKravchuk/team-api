@@ -42,7 +42,7 @@ const updateAvatar = async (req, res) => {
         code: 200,
         status: "success",
         message: "avatar added",
-        avatarURL,
+        avatarURL: `https://blende2.herokuapp.com/${avatarURL}`,
       });
     } else {
       throw RequestError(400, "Error format file");
