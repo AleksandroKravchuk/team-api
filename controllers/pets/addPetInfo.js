@@ -3,6 +3,7 @@ const path = require("path");
 const { Pets } = require("../../models/schemasPets");
 const { configImg, RequestError } = require("../../helpers");
 const avatarsDir = path.join("public", "photoPets");
+const { nanoid } = require("nanoid");
 
 const addPetInfo = async (req, res) => {
   const { _id: owner } = req.user;
@@ -13,8 +14,7 @@ const addPetInfo = async (req, res) => {
   try {
     const { path: tempUpload, originalname } = req.file;
     const extension = originalname.split(".").pop();
-
-    const filename = `${originalname}`;
+    const filename = `${nanoid()}.${extension}`;
     if (
       extension === "jpeg" ||
       extension === "png" ||
