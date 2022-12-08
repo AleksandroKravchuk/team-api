@@ -10,14 +10,14 @@ const getNoticesOwn = async (req, res) => {
     skip,
     limit,
   }).populate("owner", ["email", "phone"]);
-  if (!results || results.length === 0) {
+  if (!results) {
     throw RequestError(404, `Not found owner notice `);
   }
   res.status(200).json({
     status: "success",
     code: 200,
     data: {
-      pets: results,
+      notices: results,
     },
   });
 };
