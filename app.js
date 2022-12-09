@@ -9,6 +9,7 @@ const newsRouter = require("./routes/api/news");
 const friendsRouter = require("./routes/api/friends");
 const noticesRouter = require("./routes/api/notices");
 const userRouter = require("./routes/api/user");
+const googleRouter = require("./routes/api/google");
 const app = express();
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
@@ -25,6 +26,7 @@ app.use("/photoNotice", express.static("public/photoNotice"));
 app.use("/photoPet", express.static("public/photoPet"));
 app.use("/avatars", express.static("public/avatars"));
 app.use("/", authRouter);
+app.use("/auth", googleRouter);
 app.use("/pets", petsRouter);
 app.use("/user", userRouter);
 app.use("/notices", noticesRouter);
