@@ -37,6 +37,10 @@ const userSchema = new Schema(
       type: String,
       // required: true,
     },
+    photo: {
+      type: String,
+      // required: true,
+    },
     isId: {
       type: String,
       // required: true,

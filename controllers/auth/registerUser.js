@@ -44,6 +44,7 @@ const registerUser = async (req, res) => {
         email: userCreate.email,
         avatar: userCreate.avatar,
         avatarUrl: userCreate.avatarURL,
+        photo,
       },
     });
   }

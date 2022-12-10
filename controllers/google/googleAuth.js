@@ -1,5 +1,9 @@
 const queryString = require("query-string");
 const axios = require("axios");
+const bcrypt = require("bcrypt");
+const { User } = require("../../models");
+const gravatar = require("gravatar");
+const { RequestError } = require("../../helpers");
 // const URL = require("url");
 
 exports.googleAuth = async (req, res) => {
@@ -42,7 +46,57 @@ exports.googleRedirect = async (req, res) => {
     method: "get",
     headers: { Authorization: `Bearer ${tokenData.data.access_token}` },
   });
-  console.log(tokenData.data.access_token);
+  console.log(userData);
+  const { email } = userData.data;
+  const user = await User.findOne({ email });
+  if (user) {
+    res.status(200).json({
+      code: 200,
+      status: "success",
+      message: "User authorization",
+      data: {
+        name: user.name,
+        //  city: userCreate.city,
+        //  phone: userCreate.phone,
+        token: tokenData.data.access_token,
+        id: user._id,
+        email: user.email,
+        avatar: user.avatar,
+        avatarUrl: user.avatarURL,
+      },
+    });
+  } else {
+    const secureUrl = gravatar.url(
+      userData.email,
+      { s: "100", r: "x", d: "retro" },
+      true
+    );
+    const hashPassword = await bcrypt.hash(userData.data.id, 10);
+    const newUser = await User.create({
+      email: userData.data.email,
+      password: hashPassword,
+      name: userData.data.name,
+      // city,
+      // phone,
+      avatar: secureUrl,
+      // token: "",
+    });
+    res.status(200).json({
+      code: 200,
+      status: "success",
+      message: "User authorization",
+      data: {
+        name: newUser.name,
+        //  city: userCreate.city,
+        //  phone: userCreate.phone,
+        token: tokenData.data.access_token,
+        id: newUser._id,
+        email: newUser.email,
+        avatar: newUser.avatar,
+        avatarUrl: newUser.avatarURL,
+      },
+    });
+  }
   return res.redirect(
     `${process.env.FRONTEND_URL}?email=${userData.data.email}`
     // `${process.env.FRONTEND_URL}?accessToken=${accessToken}&refreshToken=${refreshToken}`
