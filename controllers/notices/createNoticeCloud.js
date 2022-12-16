@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fs = require("fs/promises");
 // const path = require("path");
 const { Notices } = require("../../models/schemasNotices");
 const { RequestError } = require("../../helpers");
@@ -33,7 +33,7 @@ const createNoticeCloud = async (req, res) => {
   const { path } = req.file;
   // const folder = "Notices";
   const upload = await uploads(path, "Notices");
-  fs.unlinkSync(path);
+  // fs.unlinkSync(path);
   try {
     // const upload = await cloudinary.uploader.upload(path, {
     //   folder,
