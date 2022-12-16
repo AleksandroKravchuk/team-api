@@ -12,7 +12,7 @@ const updateAvatarCloud = async (req, res) => {
     const { path } = req.file;
     const upload = await uploads(path, "Avatar");
     fs.unlinkSync(path);
-
+    console.log(upload);
     await User.findByIdAndUpdate(_id, { avatarURL: upload.url }, { new: true });
     return res.status(200).json({
       code: 200,
