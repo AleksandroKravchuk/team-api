@@ -1,15 +1,7 @@
 const fs = require("fs");
-// const path = require("path");
 const { Notices } = require("../../models/schemasNotices");
 const { RequestError } = require("../../helpers");
-// const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
-
-// cloudinary.config({
-//   cloud_name: process.env.CLOUD_NAME,
-//   api_key: process.env.CLOUDINARY_API_KEY,
-//   api_SECRET: process.env.CLOUDINARY_API_SECRET,
-// });
 const { uploads } = require("../../helpers/cloudinary");
 
 const createNoticeCloud = async (req, res) => {
@@ -32,11 +24,7 @@ const createNoticeCloud = async (req, res) => {
   }
 
   try {
-    // const upload = await cloudinary.uploader.upload(path, {
-    //   folder,
-    // });
     const { path } = req.file;
-    // const folder = "Notices";
     const upload = await uploads(path, "Notices");
     fs.unlinkSync(path);
     const result = await Notices.create(
@@ -62,7 +50,6 @@ const createNoticeCloud = async (req, res) => {
       code: 200,
       data: { notice: result },
     });
-    // fs.unlinkSync(path);
   } catch (error) {
     fs.unlink(req.file.path);
     throw error;

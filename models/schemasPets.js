@@ -7,6 +7,7 @@ const { handleSaveErrors } = require("../helpers");
 const pets = new Schema(
   {
     photoPet: { type: String },
+    public: { type: String },
     name: {
       type: String,
       minlength: 2,

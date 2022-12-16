@@ -20,7 +20,7 @@ const addPetInfoCloud = async (req, res) => {
         birth,
         breed,
         comments,
-        photo: upload.url,
+        photoPet: upload.url,
         public: upload.public_id,
         owner,
       },
@@ -28,7 +28,7 @@ const addPetInfoCloud = async (req, res) => {
     );
     res.json({
       status: "success",
-      message: "Notice success added",
+      message: "Pet success added",
       code: 200,
       data: { pets: result },
     });
