@@ -2,15 +2,15 @@ const fs = require("fs");
 // const path = require("path");
 const { Notices } = require("../../models/schemasNotices");
 const { RequestError } = require("../../helpers");
-const cloudinary = require("cloudinary").v2;
+// const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 
-cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_SECRET: process.env.CLOUDINARY_API_SECRET,
-});
-// const { uploads } = require("../../helpers/cloudinary");
+// cloudinary.config({
+//   cloud_name: process.env.CLOUD_NAME,
+//   api_key: process.env.CLOUDINARY_API_KEY,
+//   api_SECRET: process.env.CLOUDINARY_API_SECRET,
+// });
+const { uploads } = require("../../helpers/cloudinary");
 
 const createNoticeCloud = async (req, res) => {
   const { _id: owner } = req.user;
@@ -31,14 +31,13 @@ const createNoticeCloud = async (req, res) => {
     throw RequestError(400, "file required");
   }
   const { path } = req.file;
-  const folder = "Notices";
-
-  // const upload = await uploads(path, "Notices");
+  // const folder = "Notices";
+  const upload = await uploads(path, "Notices");
+  fs.unlinkSync(path);
   try {
-    const upload = await cloudinary.uploader.upload(path, {
-      folder,
-    });
-    fs.unlinkSync(path);
+    // const upload = await cloudinary.uploader.upload(path, {
+    //   folder,
+    // });
 
     const result = await Notices.create(
       {
@@ -65,7 +64,7 @@ const createNoticeCloud = async (req, res) => {
     });
     // fs.unlinkSync(path);
   } catch (error) {
-    await fs.unlink(req.file.path);
+    fs.unlink(req.file.path);
     throw error;
   }
 };

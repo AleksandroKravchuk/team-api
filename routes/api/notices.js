@@ -22,7 +22,7 @@ router.post(
   // uploader.single("photoNotices"),
   upload.single("photoNotices"),
   schemasNotice.noticeAddValidation,
-  ctrlWrapper(ctrl.createNotice)
+  ctrlWrapper(ctrl.createNoticeCloud)
 );
 
 router.delete(
