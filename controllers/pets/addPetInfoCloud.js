@@ -1,8 +1,6 @@
-const fs = require("fs/promises");
-const path = require("path");
+const fs = require("fs");
 const { Pets } = require("../../models/schemasPets");
-const { configImg, RequestError } = require("../../helpers");
-const avatarsDir = path.join("public", "pets");
+const { RequestError } = require("../../helpers");
 const { uploads } = require("../../helpers/cloudinary");
 
 const addPetInfoCloud = async (req, res) => {
@@ -35,7 +33,7 @@ const addPetInfoCloud = async (req, res) => {
       data: { pets: result },
     });
   } catch (error) {
-    await fs.unlink(req.file.path);
+    fs.unlink(req.file.path);
     throw error;
   }
 };

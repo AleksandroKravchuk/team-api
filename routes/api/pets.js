@@ -12,7 +12,7 @@ router.post(
   authenticate,
   upload.single("photoPet"),
   schemas.petsValidation,
-  ctrlWrapper(ctrl.addPetInfo)
+  ctrlWrapper(ctrl.addPetInfoCloud)
 );
 
 router.delete(

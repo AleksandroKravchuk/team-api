@@ -1,8 +1,6 @@
 const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
-// export CLOUDINARY_URL = cloudinary://API_KEY:API_SECRET@CLOUD_NAME
 
-console.log(process.env.CLOUD_NAME);
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -13,7 +11,7 @@ exports.uploads = async (file, folder) => {
     use_filename: true,
     unique_filename: false,
     overwrite: true,
-    folder: "Notices",
+    folder,
   };
 
   try {
@@ -23,10 +21,6 @@ exports.uploads = async (file, folder) => {
   } catch (error) {
     console.error(error);
   }
-  // const upload = await cloudinary.uploader.upload(file, {
-  //   folder,
-  // });
-  // return upload;
 };
 exports.deleteUploads = async (file) => {
   await cloudinary.uploader.destroy(file);
