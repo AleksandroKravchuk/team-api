@@ -1,4 +1,4 @@
-const fs = require("fs/promises");
+const fs = require("fs");
 // const path = require("path");
 const { Notices } = require("../../models/schemasNotices");
 const { RequestError } = require("../../helpers");
@@ -30,15 +30,15 @@ const createNoticeCloud = async (req, res) => {
   if (!req.file) {
     throw RequestError(400, "file required");
   }
-  const { path } = req.file;
-  // const folder = "Notices";
-  const upload = await uploads(path, "Notices");
-  // fs.unlinkSync(path);
+
   try {
     // const upload = await cloudinary.uploader.upload(path, {
     //   folder,
     // });
-
+    const { path } = req.file;
+    // const folder = "Notices";
+    const upload = await uploads(path, "Notices");
+    fs.unlinkSync(path);
     const result = await Notices.create(
       {
         category,
