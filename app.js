@@ -18,14 +18,22 @@ const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 // app.use(bodyParser.json);
 app.use(logger(formatsLogger));
 app.use(cors());
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
+app.use(
+  cors({
+    origin: ["https://upbeat-northcutt-4650a4.netlify.app"],
+    methods: ["GET", "POST", "DELETE"],
+    credentials: true,
+    origin: true,
+  })
+);
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   next();
+// });
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // app.use(express.urlencoded({ extended: false }));
