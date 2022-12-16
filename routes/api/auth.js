@@ -25,7 +25,7 @@ router.patch(
   "/avatars",
   authenticate,
   upload.single("avatar"),
-  ctrlWrapper(ctrlFs.updateAvatar)
+  ctrlWrapper(ctrlFs.updateAvatarCloud)
 );
 
 module.exports = router;
