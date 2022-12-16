@@ -32,8 +32,8 @@ const createNoticeCloud = async (req, res) => {
   }
   const { path } = req.file;
   // const folder = "Notices";
-  const upload = await uploads(path, "Notices");
-  // fs.unlinkSync(path);
+  const upload = await uploads(JSON.stringify(path), "Notices");
+  fs.unlinkSync(path);
   try {
     // const upload = await cloudinary.uploader.upload(path, {
     //   folder,
