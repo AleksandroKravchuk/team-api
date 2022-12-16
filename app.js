@@ -1,5 +1,5 @@
 const express = require("express");
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 const logger = require("morgan");
 const cors = require("cors");
 
@@ -14,11 +14,14 @@ const app = express();
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(bodyParser.json);
 app.use(logger(formatsLogger));
 app.use(cors());
-
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // app.use(express.urlencoded({ extended: false }));
