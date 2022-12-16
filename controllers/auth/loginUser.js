@@ -28,7 +28,7 @@ const loginUser = async (req, res) => {
           status: "success",
           message: "User is logged in.",
           id: user._id,
-          token,
+          token: { token },
           findUser,
         });
       } catch (error) {
