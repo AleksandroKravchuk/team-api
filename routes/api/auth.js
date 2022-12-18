@@ -14,13 +14,6 @@ router.post("/login", schemasAuth.loginValidation, ctrlWrapper(ctrl.loginUser));
 router.get("/logout", authenticate, ctrlWrapper(ctrl.logoutUser));
 router.get("/current", authenticate, ctrlWrapper(ctrl.getCurrentUser));
 
-// router.patch(
-//   "/register/:id",
-//   isValidId,
-//   schemasAuth.addInfoValidation,
-//   ctrlWrapper(ctrl.addRegisterInformation)
-// );
-
 router.patch(
   "/avatars",
   authenticate,
