@@ -25,7 +25,6 @@ const registerUser = async (req, res) => {
       avatar: secureUrl,
       token: "",
     });
-    // const em = newUser.email;
     const payload = {
       id: newUser._id,
     };
