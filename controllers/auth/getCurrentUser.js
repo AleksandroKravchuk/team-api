@@ -5,6 +5,7 @@ const getCurrentUser = async (req, res) => {
     status: "success",
     message: "Information found.",
     data: id,
+    isLoggedIn: true,
   });
 };
 module.exports = getCurrentUser;
